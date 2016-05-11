@@ -24,5 +24,7 @@ public class DeleteFirstPostTest {
 
         System.out.println(postsPg.numberOfPosts());*/
 
+        /**/
+
     }
 }
