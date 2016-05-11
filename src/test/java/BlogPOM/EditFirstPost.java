@@ -22,7 +22,7 @@ public class EditFirstPost {
     }
 
     public void editPost(String postTitleTextUpdate, String postDescritpionTextUpdate){
-        postTitleField.sendKeys("");
+        postTitleField.clear();
         postTitleField.sendKeys(postTitleTextUpdate);
         driver.switchTo().frame(postEditor);
         postDescriptionField.clear();
