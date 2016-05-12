@@ -15,7 +15,12 @@ public class DeleteFirstPostTest {
         loginPg.login();
 
         PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-        System.out.println(postsPg.postSearch("qwerty"));
+        postsPg.deleteFirstPost();
+
+
+
+        /*PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
+        System.out.println(postsPg.postSearch("qwerty"));*/
 
         /*PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
         postsPg.deleteFirstPost();

@@ -30,7 +30,8 @@ public class PostsPage {
     WebElement postsList;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__edit']")
     WebElement editFirstPostButton;
-
+    @FindBy(css = ".conf-alert")
+    WebElement trashConfirmationAlert;
 
 
     public PostsPage(WebDriver driver) {
@@ -79,4 +80,7 @@ public class PostsPage {
         return resultsList.size();
 
     }
+
+
+
 }

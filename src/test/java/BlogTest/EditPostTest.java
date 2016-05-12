@@ -39,5 +39,5 @@ public class EditPostTest {
         viewPg.testDescription(actualDescription);
 
     }
-    
+
 }

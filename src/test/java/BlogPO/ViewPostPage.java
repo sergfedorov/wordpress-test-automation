@@ -14,6 +14,11 @@ public class ViewPostPage {
     WebElement postTitle;
     @FindBy(how= How.CSS, using = ".entry-content>p")
     WebElement postDescription;
+    @FindBy(how= How.CSS, using = "#comment")
+    WebElement commentField;
+    @FindBy(how= How.CSS, using = "#comment-submit")
+    WebElement commentSubmit;
+
 
     public ViewPostPage(WebDriver driver){
         this.driver = driver;
@@ -27,5 +32,9 @@ public class ViewPostPage {
         Assert.assertEquals(expectedDescription, postDescription.getText());
     }
 
+    public void addComment (String commentText){
+        commentField.sendKeys(commentText);
+        commentSubmit.click();
+    }
 
 }
