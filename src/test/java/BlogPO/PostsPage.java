@@ -30,8 +30,10 @@ public class PostsPage {
     WebElement postsList;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__edit']")
     WebElement editFirstPostButton;
-    @FindBy(css = ".conf-alert")
-    WebElement trashConfirmationAlert;
+/*    @FindBy(css = ".conf-alert")
+    WebElement trashConfirmationAlert;*/
+    @FindBy(xpath = "//a[@href='/posts/trashed/sergeywebdrivertest.wordpress.com']/span/span[@class='count']")
+    WebElement trashCounterElem;
 
 
     public PostsPage(WebDriver driver) {
@@ -50,6 +52,10 @@ public class PostsPage {
     public void deleteFirstPost() {
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(deleteFirstPostButton));
         deleteFirstPostButton.click();
+    }
+
+    public int trashCounter() {
+        return Integer.parseInt(trashCounterElem.getText());
     }
 
     public void editFirstPost(String titleUpdate, String descritpionUpdate) {

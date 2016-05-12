@@ -35,23 +35,17 @@ public class TestNGTest {
 
     @Test
     public void trashPost(){
-        /*LoginPage loginPg1 = PageFactory.initElements(driver, LoginPage.class);
-        loginPg1.login();*/
-
         PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
 
-        WebElement trashCounter = driver.findElement(By.xpath("//a[@href='/posts/trashed/sergeywebdrivertest.wordpress.com']/span/span[@class='count']"));
-
-        int trashCounterBeforeTrash = Integer.parseInt(trashCounter.getText());
-        System.out.println(trashCounter);
+        int trashCounterBeforeTrash = postsPg.trashCounter();
         postsPg.deleteFirstPost();
+        int trashCounterAfterTrash = postsPg.trashCounter();
 
         WebElement trashConfirmationAlert = driver.findElement(By.cssSelector(".conf-alert"));
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(trashConfirmationAlert));
         Assert.assertTrue(trashConfirmationAlert.isDisplayed());
 
-        int trashCounterAfterTrash = Integer.parseInt(trashCounter.getText());
-        System.out.println(trashCounterAfterTrash);
+        Assert.assertEquals(trashCounterBeforeTrash+1, trashCounterAfterTrash);
 
     }
 
