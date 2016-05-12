@@ -4,13 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class EditFirstPost {
 
     WebDriver driver;
     @FindBy(how= How.CSS, using = ".editor-title>input")
     WebElement postTitleField;
-    @FindBy(how= How.CSS, using = ".editor-ground-control")
+    @FindBy(how= How.CSS, using = ".editor-ground-control__publish-button")
     WebElement updateButton;
     @FindBy(how= How.ID, using = "tinymce-1_ifr")
     WebElement postEditor;
@@ -22,6 +24,7 @@ public class EditFirstPost {
     }
 
     public void editPost(String postTitleTextUpdate, String postDescritpionTextUpdate){
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(postTitleField));
         postTitleField.clear();
         postTitleField.sendKeys(postTitleTextUpdate);
         driver.switchTo().frame(postEditor);
