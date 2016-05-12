@@ -1,4 +1,4 @@
-package BlogPOM;
+package BlogPO;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,6 +21,10 @@ public class ViewPostPage {
 
     public void testTitle (String expectedTitle){
         Assert.assertEquals(expectedTitle, postTitle.getText());
+    }
+
+    public void testDescription (String expectedDescription){
+        Assert.assertEquals(expectedDescription, postDescription.getText());
     }
 
 

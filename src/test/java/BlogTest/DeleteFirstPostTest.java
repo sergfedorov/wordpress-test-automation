@@ -1,5 +1,7 @@
-package BlogPOM;
+package BlogTest;
 
+import BlogPO.LoginPage;
+import BlogPO.PostsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;

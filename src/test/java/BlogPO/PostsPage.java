@@ -1,4 +1,4 @@
-package BlogPOM;
+package BlogPO;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -49,7 +49,6 @@ public class PostsPage {
     public void deleteFirstPost() {
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(deleteFirstPostButton));
         deleteFirstPostButton.click();
-
     }
 
     public void editFirstPost(String titleUpdate, String descritpionUpdate) {
