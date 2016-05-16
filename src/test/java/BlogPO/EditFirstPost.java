@@ -1,5 +1,6 @@
 package BlogPO;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,13 +25,14 @@ public class EditFirstPost {
     }
 
     public void editPost(String postTitleTextUpdate, String postDescritpionTextUpdate){
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(postTitleField));
-        postTitleField.clear();
-        postTitleField.sendKeys(postTitleTextUpdate);
         driver.switchTo().frame(postEditor);
         postDescriptionField.clear();
         postDescriptionField.sendKeys(postDescritpionTextUpdate);
         driver.switchTo().defaultContent();
+        //(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(postTitleField));
+        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".editor-title>input")));
+        postTitleField.clear();
+        postTitleField.sendKeys(postTitleTextUpdate);
         updateButton.click();
     }
 

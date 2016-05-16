@@ -25,11 +25,11 @@ public class ViewPostPage {
     }
 
     public void testTitle (String expectedTitle){
-        Assert.assertEquals(expectedTitle, postTitle.getText());
+        Assert.assertEquals(postTitle.getText(), expectedTitle);
     }
 
     public void testDescription (String expectedDescription){
-        Assert.assertEquals(expectedDescription, postDescription.getText());
+        Assert.assertEquals(postDescription.getText(), expectedDescription);
     }
 
     public void addComment (String commentText){
