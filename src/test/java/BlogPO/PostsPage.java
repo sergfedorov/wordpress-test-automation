@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class PostsPage {
     WebDriver driver;
@@ -30,15 +31,27 @@ public class PostsPage {
     WebElement postsList;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__edit']")
     WebElement editFirstPostButton;
-/*    @FindBy(css = ".conf-alert")
-    WebElement trashConfirmationAlert;*/
     @FindBy(xpath = "//a[@href='/posts/trashed/sergeywebdrivertest.wordpress.com']/span/span[@class='count']")
     WebElement trashCounterElem;
+    @FindBy(xpath = "//ul[@role='radiogroup']/li[1]")
+    WebElement filterByMeElem;
+    @FindBy(xpath = "//ul[@role='radiogroup']/li[2]")
+    WebElement filterByEveryoneElem;
+
 
 
     public PostsPage(WebDriver driver) {
         this.driver = driver;
         driver.get("https://wordpress.com/posts/sergeywebdrivertest.wordpress.com");
+        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.);
+    }
+
+    public void filterByMe() {
+        filterByMeElem.click();
+    }
+
+    public void filterByEveryone() {
+        filterByEveryoneElem.click();
     }
 
     /**/
@@ -74,18 +87,21 @@ public class PostsPage {
     public int postSearch(String searchText) {
         searchIcon.click();
         searchField.sendKeys(searchText);
-        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("article.post")));
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains(""+searchText+""));
 
-        try {
+        /*try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
+
 
         List<WebElement> resultsList = driver.findElements(By.cssSelector("article.post"));
         return resultsList.size();
 
     }
+
+
 
 
 
