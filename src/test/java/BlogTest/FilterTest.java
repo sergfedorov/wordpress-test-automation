@@ -9,7 +9,6 @@ public class FilterTest extends BaseTest{
 
     @Test
     public void filterByMe(){
-
         PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
         postsPg.filterByMe();
         Assert.assertTrue(driver.getCurrentUrl().contains("/posts/my/"));
@@ -17,9 +16,8 @@ public class FilterTest extends BaseTest{
 
     @Test
     public void filterByEveryone(){
-
         PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-        postsPg.filterByMe();
+        postsPg.filterByEveryone();
         Assert.assertFalse(driver.getCurrentUrl().contains("/posts/my/"));
     }
 }

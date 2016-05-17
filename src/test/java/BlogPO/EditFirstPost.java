@@ -25,6 +25,7 @@ public class EditFirstPost {
     }
 
     public void editPost(String postTitleTextUpdate, String postDescritpionTextUpdate){
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(updateButton));
         driver.switchTo().frame(postEditor);
         postDescriptionField.clear();
         postDescriptionField.sendKeys(postDescritpionTextUpdate);

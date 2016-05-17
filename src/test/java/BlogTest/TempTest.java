@@ -13,20 +13,11 @@ public class TempTest extends BaseTest{
 
     @Test
     public void numberOfResultsIsCorrect() {
-        String searchText = "qwerty";
+        String expectedTilte = "title update qwerty";
+        String expectedDescription = "description update";
 
         PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-
-        List<WebElement> searchRes = driver.findElements(By.xpath("//h4[contains(text(),'" +searchText + "')]"));
-        int expectedResSearch = searchRes.size();
-        int actualResSearch = postsPg.postSearch(searchText);
-
-        Assert.assertEquals(actualResSearch, expectedResSearch);
-        System.out.println("number of results returned: " +actualResSearch);
-
-        if(actualResSearch == 0){
-            Assert.assertTrue(driver.findElement(By.cssSelector(".no-results")).isDisplayed());
-        }
+        postsPg.editFirstPost(expectedTilte, expectedDescription);
 
     }
 

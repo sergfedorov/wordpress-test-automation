@@ -23,8 +23,6 @@ public class LoginPage {
     public LoginPage(WebDriver driver){
         this.driver = driver;
         driver.get("https://sergeywebdrivertest.wordpress.com/wp-login.php");
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
     }
 
     public void login(){

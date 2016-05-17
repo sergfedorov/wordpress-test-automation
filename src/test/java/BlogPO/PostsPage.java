@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -33,11 +34,17 @@ public class PostsPage {
     WebElement editFirstPostButton;
     @FindBy(xpath = "//a[@href='/posts/trashed/sergeywebdrivertest.wordpress.com']/span/span[@class='count']")
     WebElement trashCounterElem;
+    /***Filter locators***/
     @FindBy(xpath = "//ul[@role='radiogroup']/li[1]")
     WebElement filterByMeElem;
     @FindBy(xpath = "//ul[@role='radiogroup']/li[2]")
     WebElement filterByEveryoneElem;
-
+    @FindBy(xpath = "//ul[@class='section-nav-tabs__list']/li[1]")
+    WebElement filterByPublishedElem;
+    @FindBy(xpath = "//ul[@class='section-nav-tabs__list']/li[2]")
+    WebElement filterByDraftsElem;
+    @FindBy(xpath = "//ul[@class='section-nav-tabs__list']/li[3]")
+    WebElement filterByTrashedElem;
 
 
     public PostsPage(WebDriver driver) {
@@ -46,6 +53,7 @@ public class PostsPage {
         //(new WebDriverWait(driver, 5)).until(ExpectedConditions.);
     }
 
+    /***Filters***/
     public void filterByMe() {
         filterByMeElem.click();
     }
@@ -54,14 +62,25 @@ public class PostsPage {
         filterByEveryoneElem.click();
     }
 
-    /**/
+    public void filterByPublished() {
+        filterByPublishedElem.click();
+    }
+
+    public void filterByDrafts() {
+        filterByDraftsElem.click();
+    }
+
+    public void filterByTrashed() {
+        filterByTrashedElem.click();
+    }
+
+
     public void createNewPost(String title, String descritpion) {
         createNewPostLoc.click();
         CreatePostPage postPg = PageFactory.initElements(driver, CreatePostPage.class);
         postPg.createPost(title, descritpion);
     }
 
-    /**/
     public void deleteFirstPost() {
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(deleteFirstPostButton));
         deleteFirstPostButton.click();
