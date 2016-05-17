@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class CreatePostPage {
     WebDriver driver;
@@ -15,6 +18,8 @@ public class CreatePostPage {
     WebElement postEditor;
     @FindBy(how = How.ID, using = "tinymce")
     WebElement postDescriptionField;
+    @FindBy(css = ".is-success")
+    WebElement publishedSuccessfullyBar;
 
 
     public CreatePostPage(WebDriver driver) {
@@ -25,10 +30,19 @@ public class CreatePostPage {
     }
 
     public void createPost(String postTitleText, String postDescritpionText) {
+        Assert.assertFalse(publishButton.isEnabled());
         postTitleField.sendKeys(postTitleText);
         driver.switchTo().frame(postEditor);
         postDescriptionField.sendKeys(postDescritpionText);
         driver.switchTo().defaultContent();
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         publishButton.click();
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(publishedSuccessfullyBar));
     }
 }

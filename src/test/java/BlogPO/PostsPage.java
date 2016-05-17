@@ -34,6 +34,8 @@ public class PostsPage {
     WebElement editFirstPostButton;
     @FindBy(xpath = "//a[@href='/posts/trashed/sergeywebdrivertest.wordpress.com']/span/span[@class='count']")
     WebElement trashCounterElem;
+    @FindBy(css = ".conf-alert")
+    WebElement trashConfirmationAlert;
     /***Filter locators***/
     @FindBy(xpath = "//ul[@role='radiogroup']/li[1]")
     WebElement filterByMeElem;
@@ -84,6 +86,7 @@ public class PostsPage {
     public void deleteFirstPost() {
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(deleteFirstPostButton));
         deleteFirstPostButton.click();
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(trashConfirmationAlert));
     }
 
     public int trashCounter() {
