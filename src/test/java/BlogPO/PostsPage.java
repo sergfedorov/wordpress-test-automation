@@ -79,8 +79,8 @@ public class PostsPage {
 
     public void createNewPost(String title, String descritpion) {
         createNewPostLoc.click();
-        CreatePostPage postPg = PageFactory.initElements(driver, CreatePostPage.class);
-        postPg.createPost(title, descritpion);
+        EditorPage postEditor = PageFactory.initElements(driver, EditorPage.class);
+        postEditor.createPost(title, descritpion);
     }
 
     public void deleteFirstPost() {
@@ -96,8 +96,8 @@ public class PostsPage {
     public void editFirstPost(String titleUpdate, String descritpionUpdate) {
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(editFirstPostButton));
         editFirstPostButton.click();
-        EditFirstPost editPg = PageFactory.initElements(driver, EditFirstPost.class);
-        editPg.editPost(titleUpdate, descritpionUpdate);
+        EditorPage postEditor = PageFactory.initElements(driver, EditorPage.class);
+        postEditor.editPost(titleUpdate, descritpionUpdate);
     }
 
     public int numberOfPosts() {

@@ -58,32 +58,5 @@ public class CreateNewPostTest extends BaseTest{
         viewPg.testDescription(expectedDescriptionForNewPost);
     }
 
-    /*@Test(priority = 3)
-    public void createPostTest() {
-        String expectedTilteForNewPost = "new post title test";
-        String expectedDescriptionForNewPost = "new description title test";
-
-        PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-        postsPg.createNewPost(expectedTilteForNewPost, expectedDescriptionForNewPost);
-
-        WebElement publishedSuccessfullyBar = driver.findElement(By.cssSelector(".is-success"));
-        WebElement publishedTime = driver.findElement(By.cssSelector(".editor-status-label>span"));
-
-        Assert.assertTrue(publishedSuccessfullyBar.isDisplayed());
-        Assert.assertEquals(publishedTime.getText(), "A MINUTE AGO");
-
-        driver.findElement(By.cssSelector(".notice__action>span")).click();
-
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.numberOfWindowsToBe(2));
-
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
-
-        ViewPostPage viewPg = PageFactory.initElements(driver, ViewPostPage.class);
-        viewPg.testTitle(expectedTilteForNewPost);
-        viewPg.testDescription(expectedDescriptionForNewPost);
-
-    }*/
-
 
 }

@@ -1,5 +1,6 @@
 package BlogTest;
 
+import BlogPO.EditorPage;
 import BlogPO.LoginPage;
 import BlogPO.PostsPage;
 import BlogPO.ViewPostPage;
@@ -8,47 +9,45 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
 public class EditPostTest extends BaseTest {
 
-    @Test
-    public void editPostTest(){
-        String expectedTilte = "title update qwerty";
-        String expectedDescription = "description update";
+    String expectedTilte = "title update";
+    String expectedDescription = "description update";
 
+    @BeforeMethod
+    public void editPost(){
         PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
         postsPg.editFirstPost(expectedTilte, expectedDescription);
+    }
 
-        driver.findElement(By.cssSelector(".editor-ground-control__preview-button")).click();
+    @Test(priority = 1)
+    public void verifyPreview(){
 
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector(".web-preview__frame"))));
-        driver.switchTo().frame(driver.findElement(By.cssSelector(".web-preview__frame")));
+        EditorPage editorPg = PageFactory.initElements(driver, EditorPage.class);
+        editorPg.previewPost();
 
-        Assert.assertEquals(driver.findElement(By.cssSelector(".entry-header")).getText(), expectedTilte);
-        Assert.assertEquals(driver.findElement(By.cssSelector(".entry-content>p")).getText(), expectedDescription);
+        ViewPostPage viewPg = PageFactory.initElements(driver, ViewPostPage.class);
+        viewPg.testTitle(expectedTilte);
+        viewPg.testDescription(expectedDescription);
+    }
 
-        driver.switchTo().defaultContent();
-        driver.findElement(By.cssSelector(".web-preview__close")).click();
+    @Test(priority = 2)
+    public void verifyChangesOnPublishedPost(){
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        driver.findElement(By.cssSelector(".notice__action>span")).click();
-
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.numberOfWindowsToBe(2));
-
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
+        EditorPage editorPg = PageFactory.initElements(driver, EditorPage.class);
+        editorPg.viewPublishedPost();
 
         ViewPostPage viewPg = PageFactory.initElements(driver, ViewPostPage.class);
         viewPg.testTitle(expectedTilte);
         viewPg.testDescription(expectedDescription);
 
     }
+
+
+
 }
