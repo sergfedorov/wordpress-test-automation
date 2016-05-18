@@ -1,5 +1,6 @@
 package BlogTest;
 
+import BlogPO.EditorPage;
 import BlogPO.PostsPage;
 import BlogPO.ViewPostPage;
 import org.openqa.selenium.By;
@@ -18,12 +19,13 @@ import java.util.ArrayList;
 public class CreateNewPostTest extends BaseTest{
 
     String expectedTilteForNewPost = "new post title test";
-    String expectedDescriptionForNewPost = "new description title test";
+    String expectedDescriptionForNewPost = "new description test";
 
     @BeforeMethod
     public void createPost(){
         PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-        postsPg.createNewPost(expectedTilteForNewPost, expectedDescriptionForNewPost);
+        EditorPage editorPg = postsPg.clickCreatePost();
+        editorPg.createPost(expectedTilteForNewPost, expectedDescriptionForNewPost);
     }
 
     @AfterMethod
@@ -35,27 +37,39 @@ public class CreateNewPostTest extends BaseTest{
     @Test(priority = 1)
     public void successBar(){
         WebElement publishedSuccessfullyBar = driver.findElement(By.cssSelector(".is-success"));
+
+        EditorPage editorPg = PageFactory.initElements(driver, EditorPage.class);
+        String actualResult = editorPg.getTextFromSuccessBar();
+        Assert.assertEquals(actualResult, "Post published");
+
+
         Assert.assertTrue(publishedSuccessfullyBar.isDisplayed());
     }
 
     @Test(priority = 2)
     public void publishTime(){
         WebElement publishedTime = driver.findElement(By.cssSelector(".editor-status-label>span"));
+
         Assert.assertEquals(publishedTime.getText(), "A MINUTE AGO");
     }
 
     @Test(priority = 3)
     public void verifyPublishedPost(){
-        driver.findElement(By.cssSelector(".notice__action>span")).click();
+        EditorPage editorPg = PageFactory.initElements(driver, EditorPage.class);
+        ViewPostPage viewPg = editorPg.viewPublishedPost();
 
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.numberOfWindowsToBe(2));
-
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
-
-        ViewPostPage viewPg = PageFactory.initElements(driver, ViewPostPage.class);
         viewPg.testTitle(expectedTilteForNewPost);
         viewPg.testDescription(expectedDescriptionForNewPost);
+    }
+
+    @Test(priority = 4)
+    public void verifyPostList(){
+        PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
+
+        postsPg.filterByPublished();
+        postsPg.testTitleInList(expectedTilteForNewPost);
+        postsPg.testDescriptionInList(expectedDescriptionForNewPost);
+
     }
 
 

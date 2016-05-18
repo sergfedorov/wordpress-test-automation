@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -16,10 +18,6 @@ public class PostsPage {
     WebDriver driver;
     @FindBy(className = "gridicons-create")
     WebElement createNewPostLoc;
-    @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__trash']")
-    WebElement deleteFirstPostLoc;
-    @FindBy(css = "article.post")
-    WebElement postList;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__trash']")
     WebElement deleteFirstPostButton;
     @FindBy(css = "div[aria-controls='search-component-2']>svg")
@@ -36,6 +34,12 @@ public class PostsPage {
     WebElement trashCounterElem;
     @FindBy(css = ".conf-alert")
     WebElement trashConfirmationAlert;
+    @FindBy(xpath = "//div[@class='posts__list']/article[1]//h4[@class='post__title']")
+    WebElement postInListTitle;
+    @FindBy(xpath = "//div[@class='posts__list']/article[1]//div[@class='post-excerpt']")
+    WebElement postInListDescription;
+
+
     /***Filter locators***/
     @FindBy(xpath = "//ul[@role='radiogroup']/li[1]")
     WebElement filterByMeElem;
@@ -49,10 +53,10 @@ public class PostsPage {
     WebElement filterByTrashedElem;
 
 
+
     public PostsPage(WebDriver driver) {
         this.driver = driver;
         driver.get("https://wordpress.com/posts/sergeywebdrivertest.wordpress.com");
-        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.);
     }
 
     /***Filters***/
@@ -76,11 +80,17 @@ public class PostsPage {
         filterByTrashedElem.click();
     }
 
-
-    public void createNewPost(String title, String descritpion) {
+    public EditorPage clickCreatePost() {
         createNewPostLoc.click();
-        EditorPage postEditor = PageFactory.initElements(driver, EditorPage.class);
-        postEditor.createPost(title, descritpion);
+        return PageFactory.initElements(driver, EditorPage.class);
+    }
+
+    public void testTitleInList(String expectedTitle){
+        Assert.assertEquals(postInListTitle.getText(), expectedTitle);
+    }
+
+    public void testDescriptionInList(String expectedDescription){
+        Assert.assertEquals(postInListDescription.getText(), expectedDescription);
     }
 
     public void deleteFirstPost() {
@@ -93,11 +103,10 @@ public class PostsPage {
         return Integer.parseInt(trashCounterElem.getText());
     }
 
-    public void editFirstPost(String titleUpdate, String descritpionUpdate) {
+    public EditorPage clickEditPost(){
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(editFirstPostButton));
         editFirstPostButton.click();
-        EditorPage postEditor = PageFactory.initElements(driver, EditorPage.class);
-        postEditor.editPost(titleUpdate, descritpionUpdate);
+        return PageFactory.initElements(driver, EditorPage.class);
     }
 
     public int numberOfPosts() {

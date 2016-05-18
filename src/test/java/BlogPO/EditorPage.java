@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -29,10 +30,8 @@ public class EditorPage {
     WebElement previewFrame;
     @FindBy(css = ".notice__action>span")
     WebElement viewPostButton;
-
-
-
-
+    @FindBy(css = ".is-success>div>span")
+    WebElement publishedSuccessfullyText;
 
 
 
@@ -45,6 +44,8 @@ public class EditorPage {
 
     public void createPost(String postTitleText, String postDescritpionText) {
         Assert.assertFalse(publishButton.isEnabled());
+        Assert.assertEquals(publishButton.getText(), "Publish");
+
         postTitleField.sendKeys(postTitleText);
         driver.switchTo().frame(postEditor);
         postDescriptionField.sendKeys(postDescritpionText);
@@ -62,29 +63,37 @@ public class EditorPage {
 
     public void editPost(String postTitleTextUpdate, String postDescritpionTextUpdate){
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(publishButton));
+
+        Assert.assertTrue(publishButton.isEnabled());
+        Assert.assertEquals(publishButton.getText(), "Update");
+
         driver.switchTo().frame(postEditor);
         postDescriptionField.clear();
         postDescriptionField.sendKeys(postDescritpionTextUpdate);
         driver.switchTo().defaultContent();
-        //(new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(postTitleField));
-        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".editor-title>input")));
         postTitleField.clear();
         postTitleField.sendKeys(postTitleTextUpdate);
         publishButton.click();
     }
 
-    public void previewPost(){
+    public ViewPostPage previewPost(){
         previewPostButton.click();
         //(new WebDriverWait(driver, 5)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(previewFrame));
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(previewFrame));
         driver.switchTo().frame(previewFrame);
+        return PageFactory.initElements(driver, ViewPostPage.class);
     }
 
-    public void viewPublishedPost(){
+    public ViewPostPage viewPublishedPost(){
         viewPostButton.click();
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.numberOfWindowsToBe(2));
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
+        return PageFactory.initElements(driver, ViewPostPage.class);
+    }
+
+    public String getTextFromSuccessBar(){
+        return publishedSuccessfullyText.getText();
     }
 
 }

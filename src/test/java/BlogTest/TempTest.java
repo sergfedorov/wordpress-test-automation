@@ -16,8 +16,8 @@ public class TempTest extends BaseTest{
         String expectedTilte = "title update qwerty";
         String expectedDescription = "description update";
 
-        PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-        postsPg.editFirstPost(expectedTilte, expectedDescription);
+        /*PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
+        postsPg.editFirstPost(expectedTilte, expectedDescription);*/
 
     }
 

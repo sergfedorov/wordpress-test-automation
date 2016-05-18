@@ -22,22 +22,21 @@ public class EditPostTest extends BaseTest {
     @BeforeMethod
     public void editPost(){
         PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-        postsPg.editFirstPost(expectedTilte, expectedDescription);
+        EditorPage editorPg = postsPg.clickEditPost();
+        editorPg.editPost(expectedTilte, expectedDescription);
     }
 
     @Test(priority = 1)
     public void verifyPreview(){
 
         EditorPage editorPg = PageFactory.initElements(driver, EditorPage.class);
-        editorPg.previewPost();
-
-        ViewPostPage viewPg = PageFactory.initElements(driver, ViewPostPage.class);
+        ViewPostPage viewPg = editorPg.previewPost();
         viewPg.testTitle(expectedTilte);
         viewPg.testDescription(expectedDescription);
     }
 
     @Test(priority = 2)
-    public void verifyChangesOnPublishedPost(){
+    public void verifyViewPublished(){
 
         EditorPage editorPg = PageFactory.initElements(driver, EditorPage.class);
         editorPg.viewPublishedPost();
