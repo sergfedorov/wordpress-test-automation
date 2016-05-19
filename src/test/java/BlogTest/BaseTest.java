@@ -14,13 +14,19 @@ public class BaseTest {
 
     WebDriver driver;
 
-    @BeforeSuite
+    public BaseTest(){
+        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
+        driver = new ChromeDriver();
+    }
+
+
+/*    @BeforeSuite
     public void BrowserInit() {
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-    }
+    }*/
 
     @BeforeClass
     public void blogLoginTest(){

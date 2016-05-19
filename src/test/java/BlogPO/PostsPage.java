@@ -57,6 +57,7 @@ public class PostsPage {
     public PostsPage(WebDriver driver) {
         this.driver = driver;
         driver.get("https://wordpress.com/posts/sergeywebdrivertest.wordpress.com");
+        //PageFactory.initElements(driver, this); /*!!!*/
     }
 
     /***Filters***/

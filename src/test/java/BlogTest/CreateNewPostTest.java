@@ -21,16 +21,20 @@ public class CreateNewPostTest extends BaseTest{
     String expectedTilteForNewPost = "new post title test";
     String expectedDescriptionForNewPost = "new description test";
 
+    //PostsPage postsPg = new PostsPage(driver);
+
+    PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
+
     @BeforeMethod
     public void createPost(){
-        PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
+        //PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
         EditorPage editorPg = postsPg.clickCreatePost();
         editorPg.createPost(expectedTilteForNewPost, expectedDescriptionForNewPost);
     }
 
     @AfterMethod
     public void deletePost(){
-        PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
+        //PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
         postsPg.deleteFirstPost();
     }
 
@@ -64,7 +68,7 @@ public class CreateNewPostTest extends BaseTest{
 
     @Test(priority = 4)
     public void verifyPostList(){
-        PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
+        //PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
 
         postsPg.filterByPublished();
         postsPg.testTitleInList(expectedTilteForNewPost);
