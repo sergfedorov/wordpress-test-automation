@@ -13,25 +13,19 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest {
 
     WebDriver driver;
+    LoginPage loginPage = new LoginPage(driver);
 
     public BaseTest(){
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
     }
 
 
-/*    @BeforeSuite
-    public void BrowserInit() {
-        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-    }*/
-
     @BeforeClass
     public void blogLoginTest(){
-        LoginPage loginPg = PageFactory.initElements(driver, LoginPage.class);
-        loginPg.login();
+        loginPage.login();
         Assert.assertEquals(driver.getTitle(), "Dashboard ‹ sergeywebdrivertest — WordPress");
     }
 

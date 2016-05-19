@@ -56,8 +56,7 @@ public class PostsPage {
 
     public PostsPage(WebDriver driver) {
         this.driver = driver;
-        driver.get("https://wordpress.com/posts/sergeywebdrivertest.wordpress.com");
-        //PageFactory.initElements(driver, this); /*!!!*/
+        PageFactory.initElements(driver, this);
     }
 
     /***Filters***/
@@ -82,6 +81,7 @@ public class PostsPage {
     }
 
     public EditorPage clickCreatePost() {
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(createNewPostLoc));
         createNewPostLoc.click();
         return PageFactory.initElements(driver, EditorPage.class);
     }
@@ -95,6 +95,7 @@ public class PostsPage {
     }
 
     public void deleteFirstPost() {
+        driver.get("https://wordpress.com/posts/sergeywebdrivertest.wordpress.com");
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(deleteFirstPostButton));
         deleteFirstPostButton.click();
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(trashConfirmationAlert));

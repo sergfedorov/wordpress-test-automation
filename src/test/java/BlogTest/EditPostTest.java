@@ -1,49 +1,39 @@
 package BlogTest;
 
 import BlogPO.EditorPage;
-import BlogPO.LoginPage;
 import BlogPO.PostsPage;
 import BlogPO.ViewPostPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 
 public class EditPostTest extends BaseTest {
 
     String expectedTilte = "title update";
     String expectedDescription = "description update";
 
+    PostsPage postsPage = new PostsPage(driver);
+    EditorPage editorPage = new EditorPage(driver);
+    ViewPostPage viewPage = new ViewPostPage(driver);
+
     @BeforeMethod
     public void editPost(){
-        PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-        EditorPage editorPg = postsPg.clickEditPost();
-        editorPg.editPost(expectedTilte, expectedDescription);
+        postsPage.clickEditPost();
+        editorPage.editPost(expectedTilte, expectedDescription);
     }
 
     @Test(priority = 1)
     public void verifyPreview(){
-
-        EditorPage editorPg = PageFactory.initElements(driver, EditorPage.class);
-        ViewPostPage viewPg = editorPg.previewPost();
-        viewPg.testTitle(expectedTilte);
-        viewPg.testDescription(expectedDescription);
+        editorPage.previewPost();
+        viewPage.testTitle(expectedTilte);
+        viewPage.testDescription(expectedDescription);
     }
 
     @Test(priority = 2)
     public void verifyViewPublished(){
-
-        EditorPage editorPg = PageFactory.initElements(driver, EditorPage.class);
-        editorPg.viewPublishedPost();
-
-        ViewPostPage viewPg = PageFactory.initElements(driver, ViewPostPage.class);
-        viewPg.testTitle(expectedTilte);
-        viewPg.testDescription(expectedDescription);
+        editorPage.viewPublishedPost();
+        viewPage.testTitle(expectedTilte);
+        viewPage.testDescription(expectedDescription);
 
     }
 

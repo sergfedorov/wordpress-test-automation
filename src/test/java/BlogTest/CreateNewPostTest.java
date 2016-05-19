@@ -3,17 +3,10 @@ package BlogTest;
 import BlogPO.EditorPage;
 import BlogPO.PostsPage;
 import BlogPO.ViewPostPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 
 
 public class CreateNewPostTest extends BaseTest{
@@ -21,58 +14,46 @@ public class CreateNewPostTest extends BaseTest{
     String expectedTilteForNewPost = "new post title test";
     String expectedDescriptionForNewPost = "new description test";
 
-    //PostsPage postsPg = new PostsPage(driver);
-
-    PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
+    PostsPage postsPage = new PostsPage(driver);
+    EditorPage editorPage = new EditorPage(driver);
+    ViewPostPage viewPage = new ViewPostPage(driver);
 
     @BeforeMethod
     public void createPost(){
-        //PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-        EditorPage editorPg = postsPg.clickCreatePost();
-        editorPg.createPost(expectedTilteForNewPost, expectedDescriptionForNewPost);
+        driver.get("https://wordpress.com/posts/sergeywebdrivertest.wordpress.com");
+        postsPage.clickCreatePost();
+        editorPage.createPost(expectedTilteForNewPost, expectedDescriptionForNewPost);
     }
 
     @AfterMethod
     public void deletePost(){
-        //PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-        postsPg.deleteFirstPost();
+        postsPage.deleteFirstPost();
     }
 
     @Test(priority = 1)
     public void successBar(){
-        WebElement publishedSuccessfullyBar = driver.findElement(By.cssSelector(".is-success"));
-
-        EditorPage editorPg = PageFactory.initElements(driver, EditorPage.class);
-        String actualResult = editorPg.getTextFromSuccessBar();
-        Assert.assertEquals(actualResult, "Post published");
-
-
-        Assert.assertTrue(publishedSuccessfullyBar.isDisplayed());
+        Assert.assertEquals(editorPage.getTextFromSuccessBar(), "Post published on");
+        Assert.assertEquals(editorPage.isSuccessBarDisplayed(), Boolean.TRUE);
     }
 
     @Test(priority = 2)
     public void publishTime(){
-        WebElement publishedTime = driver.findElement(By.cssSelector(".editor-status-label>span"));
-
-        Assert.assertEquals(publishedTime.getText(), "A MINUTE AGO");
+        Assert.assertEquals(editorPage.getPublishedTime(), "A MINUTE AGO");
     }
 
     @Test(priority = 3)
     public void verifyPublishedPost(){
-        EditorPage editorPg = PageFactory.initElements(driver, EditorPage.class);
-        ViewPostPage viewPg = editorPg.viewPublishedPost();
-
-        viewPg.testTitle(expectedTilteForNewPost);
-        viewPg.testDescription(expectedDescriptionForNewPost);
+        editorPage.viewPublishedPost();
+        viewPage.testTitle(expectedTilteForNewPost);
+        viewPage.testDescription(expectedDescriptionForNewPost);
     }
 
     @Test(priority = 4)
     public void verifyPostList(){
-        //PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
-
-        postsPg.filterByPublished();
-        postsPg.testTitleInList(expectedTilteForNewPost);
-        postsPg.testDescriptionInList(expectedDescriptionForNewPost);
+        driver.get("https://wordpress.com/posts/sergeywebdrivertest.wordpress.com");
+        postsPage.filterByPublished();
+        postsPage.testTitleInList(expectedTilteForNewPost);
+        postsPage.testDescriptionInList(expectedDescriptionForNewPost);
 
     }
 

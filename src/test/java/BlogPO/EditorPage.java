@@ -30,16 +30,19 @@ public class EditorPage {
     WebElement previewFrame;
     @FindBy(css = ".notice__action>span")
     WebElement viewPostButton;
-    @FindBy(css = ".is-success>div>span")
+    @FindBy(css = ".is-success>div>span>span")
     WebElement publishedSuccessfullyText;
+    @FindBy(css = ".editor-status-label>span")
+    WebElement publishedTime;
 
 
 
     public EditorPage(WebDriver driver) {
         this.driver = driver;
-        if (!driver.getCurrentUrl().contains("/post")) {
+        PageFactory.initElements(driver, this);
+        /*if (!driver.getCurrentUrl().contains("/post")) {
             throw new IllegalStateException("This is not New Post page, current page is: " + driver.getCurrentUrl());
-        }
+        }*/
     }
 
     public void createPost(String postTitleText, String postDescritpionText) {
@@ -94,6 +97,14 @@ public class EditorPage {
 
     public String getTextFromSuccessBar(){
         return publishedSuccessfullyText.getText();
+    }
+
+    public Boolean isSuccessBarDisplayed(){
+        return publishedSuccessfullyBar.isDisplayed();
+    }
+
+    public String getPublishedTime(){
+        return publishedTime.getText();
     }
 
 }
