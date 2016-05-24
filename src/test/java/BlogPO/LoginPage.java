@@ -15,23 +15,52 @@ public class LoginPage {
     WebDriver driver;
 
     @FindBy(how= How.ID, using = "user_login")
-            WebElement usernameField;
+    WebElement usernameField;
     @FindBy(how= How.ID, using = "user_pass")
-            WebElement passwordField;
+    WebElement passwordField;
     @FindBy(how= How.ID, using = "wp-submit")
-            WebElement submitLoginButton;
+    WebElement submitLoginButton;
+    @FindBy(id = "login_error")
+    WebElement loginError;
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        driver.get("https://sergeywebdrivertest.wordpress.com/wp-login.php");
     }
 
-    public void login(){
-        usernameField.sendKeys("editorwebdrivertest");
-        passwordField.sendKeys("EditorTest");
+    public void navigate(){
+        driver.get("https://sergeywebdrivertest.wordpress.com/wp-login.php");
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(submitLoginButton));
+    }
+
+    public void login(String username, String password){
+        this.navigate();
+        usernameField.sendKeys(username);
+        passwordField.sendKeys(password);
         submitLoginButton.click();
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("wp-admin"));
     }
+
+    public void fillUsernameField(String username){
+        usernameField.sendKeys(username);
+    }
+
+    public void fillPasswordField(String password){
+        passwordField.sendKeys(password);
+    }
+
+    public void clickLogIn(){
+        submitLoginButton.click();
+    }
+
+    public Boolean isErrorDisplayed(){
+        return loginError.isDisplayed();
+    }
+
+    public String getErrorMessageText(){
+        return loginError.getText();
+    }
+
+
 
 }

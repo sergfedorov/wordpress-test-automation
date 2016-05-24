@@ -1,10 +1,12 @@
 package BlogTest;
 
 import BlogPO.EditorPage;
+import BlogPO.LoginPage;
 import BlogPO.PostsPage;
 import BlogPO.ViewPostPage;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,19 +16,27 @@ public class CreateNewPostTest extends BaseTest{
     String expectedTilteForNewPost = "new post title test";
     String expectedDescriptionForNewPost = "new description test";
 
+    LoginPage loginPage = new LoginPage(driver);
     PostsPage postsPage = new PostsPage(driver);
     EditorPage editorPage = new EditorPage(driver);
     ViewPostPage viewPage = new ViewPostPage(driver);
 
+
+    @BeforeClass
+    public void blogLoginTest(){
+        loginPage.login("editorwebdrivertest", "EditorTest");
+    }
+
     @BeforeMethod
     public void createPost(){
-        driver.get("https://wordpress.com/posts/sergeywebdrivertest.wordpress.com");
+        postsPage.navigate();
         postsPage.clickCreatePost();
         editorPage.createPost(expectedTilteForNewPost, expectedDescriptionForNewPost);
     }
 
     @AfterMethod
     public void deletePost(){
+        postsPage.navigate();
         postsPage.deleteFirstPost();
     }
 
@@ -50,7 +60,7 @@ public class CreateNewPostTest extends BaseTest{
 
     @Test(priority = 4)
     public void verifyPostList(){
-        driver.get("https://wordpress.com/posts/sergeywebdrivertest.wordpress.com");
+        postsPage.navigate();
         postsPage.filterByPublished();
         postsPage.testTitleInList(expectedTilteForNewPost);
         postsPage.testDescriptionInList(expectedDescriptionForNewPost);

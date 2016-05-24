@@ -11,7 +11,7 @@ import org.testng.Assert;
 
 import java.util.ArrayList;
 
-public class EditorPage {
+public class EditorPage{
 
     WebDriver driver;
     @FindBy(how = How.CSS, using = ".editor-title>input")
@@ -36,7 +36,7 @@ public class EditorPage {
     WebElement publishedTime;
 
 
-
+    /***Constructor***/
     public EditorPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -44,6 +44,10 @@ public class EditorPage {
             throw new IllegalStateException("This is not New Post page, current page is: " + driver.getCurrentUrl());
         }*/
     }
+
+/*    public void customClick(WebElement elem){
+        super.customClick(elem);
+    }*/
 
     public void createPost(String postTitleText, String postDescritpionText) {
         Assert.assertFalse(publishButton.isEnabled());

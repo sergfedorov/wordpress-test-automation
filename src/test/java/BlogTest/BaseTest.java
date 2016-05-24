@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest {
 
     WebDriver driver;
-    LoginPage loginPage = new LoginPage(driver);
 
     public BaseTest(){
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
@@ -23,10 +22,5 @@ public class BaseTest {
     }
 
 
-    @BeforeClass
-    public void blogLoginTest(){
-        loginPage.login();
-        Assert.assertEquals(driver.getTitle(), "Dashboard ‹ sergeywebdrivertest — WordPress");
-    }
 
 }

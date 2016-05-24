@@ -4,29 +4,32 @@ import BlogPO.LoginPage;
 import BlogPO.PostsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class DeletePostTest extends BaseTest{
 
+    LoginPage loginPage  = new LoginPage(driver);
+    PostsPage postsPage = new PostsPage(driver);
+
+    @BeforeClass
+    public void blogLogin(){
+        loginPage.login("editorwebdrivertest", "EditorTest");
+    }
+
     @Test
     public void trashPost(){
-        PostsPage postsPg = PageFactory.initElements(driver, PostsPage.class);
+        postsPage.navigate();
+        int trashCounterBeforeTrash = postsPage.trashCounter();
 
-        int trashCounterBeforeTrash = postsPg.trashCounter();
-
-        postsPg.deleteFirstPost();
+        postsPage.deleteFirstPost();
         WebElement trashConfirmationAlert = driver.findElement(By.cssSelector(".conf-alert"));
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(trashConfirmationAlert));
 
-        int trashCounterAfterTrash = postsPg.trashCounter();
+        int trashCounterAfterTrash = postsPage.trashCounter();
 
         Assert.assertTrue(trashConfirmationAlert.isDisplayed());
         Assert.assertEquals(trashCounterBeforeTrash, trashCounterAfterTrash-1);
-
     }
 
 }

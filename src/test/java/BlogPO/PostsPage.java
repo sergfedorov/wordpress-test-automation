@@ -14,8 +14,10 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class PostsPage {
+public class PostsPage{
     WebDriver driver;
+    String postsPageUrl = "https://wordpress.com/posts/sergeywebdrivertest.wordpress.com";
+
     @FindBy(className = "gridicons-create")
     WebElement createNewPostLoc;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__trash']")
@@ -53,10 +55,21 @@ public class PostsPage {
     WebElement filterByTrashedElem;
 
 
-
+    /***Constructor***/
     public PostsPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+    }
+
+/*    public void customClick(WebElement elem){
+        super.customClick(elem);
+    }*/
+
+    public void navigate() {
+        if (!driver.getCurrentUrl().equals(postsPageUrl)) {
+            driver.get(postsPageUrl);
+        }
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(filterByPublishedElem));
     }
 
     /***Filters***/
@@ -83,6 +96,7 @@ public class PostsPage {
     public EditorPage clickCreatePost() {
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(createNewPostLoc));
         createNewPostLoc.click();
+        //customClick(createNewPostLoc);
         return PageFactory.initElements(driver, EditorPage.class);
     }
 
@@ -95,9 +109,9 @@ public class PostsPage {
     }
 
     public void deleteFirstPost() {
-        driver.get("https://wordpress.com/posts/sergeywebdrivertest.wordpress.com");
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(deleteFirstPostButton));
         deleteFirstPostButton.click();
+        //customClick(deleteFirstPostButton);
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(trashConfirmationAlert));
     }
 
@@ -108,6 +122,7 @@ public class PostsPage {
     public EditorPage clickEditPost(){
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(editFirstPostButton));
         editFirstPostButton.click();
+        //customClick(editFirstPostButton);
         return PageFactory.initElements(driver, EditorPage.class);
     }
 
@@ -120,13 +135,13 @@ public class PostsPage {
     public int postSearch(String searchText) {
         searchIcon.click();
         searchField.sendKeys(searchText);
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains(""+searchText+""));
+        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains(""+searchText+""));
 
-        /*try {
+        try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
 
 
         List<WebElement> resultsList = driver.findElements(By.cssSelector("article.post"));
