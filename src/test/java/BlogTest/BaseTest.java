@@ -14,11 +14,19 @@ public class BaseTest {
 
     WebDriver driver;
 
-    public BaseTest(){
+/*    public BaseTest(){
         System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+    }*/
+
+    public WebDriver init(){
+        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //driver.manage().window().maximize();
+        return driver;
     }
 
 

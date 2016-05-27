@@ -8,8 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DashboardPage {
-    WebDriver driver;
+public class DashboardPage extends Page{
 
     @FindBy(id = "wp-admin-bar-my-account")
     WebElement userMenu;
@@ -19,7 +18,7 @@ public class DashboardPage {
 
 
     public DashboardPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 

@@ -1,16 +1,29 @@
 package BlogTest;
 
-import BlogPO.DashboardPage;
-import BlogPO.LoginPage;
+import BlogPO.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    LoginPage loginPage = new LoginPage(driver);
-    DashboardPage dashboardPage = new DashboardPage(driver);
+    LoginPage loginPage;
+    PostsPage postsPage;
+    EditorPage editorPage;
+    ViewPostPage viewPage;
+    DashboardPage dashboardPage;
+
+    @BeforeTest
+    public void initBrowserAndPageObjects(){
+        driver = super.init();
+        loginPage = new LoginPage(driver);
+        postsPage = new PostsPage(driver);
+        editorPage = new EditorPage(driver);
+        viewPage = new ViewPostPage(driver);
+        dashboardPage = new DashboardPage(driver);
+    }
 
 
     @Test(priority = 1)

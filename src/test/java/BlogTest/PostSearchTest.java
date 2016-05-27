@@ -1,20 +1,33 @@
 package BlogTest;
 
-import BlogPO.LoginPage;
-import BlogPO.PostsPage;
+import BlogPO.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 public class PostSearchTest extends BaseTest{
 
-    LoginPage loginPage  = new LoginPage(driver);
-    PostsPage postsPage = new PostsPage(driver);
+    LoginPage loginPage;
+    PostsPage postsPage;
+    EditorPage editorPage;
+    ViewPostPage viewPage;
+    DashboardPage dashboardPage;
+
+    @BeforeTest
+    public void initBrowserAndPageObjects(){
+        driver = super.init();
+        loginPage = new LoginPage(driver);
+        postsPage = new PostsPage(driver);
+        editorPage = new EditorPage(driver);
+        viewPage = new ViewPostPage(driver);
+        dashboardPage = new DashboardPage(driver);
+    }
 
     @BeforeClass
     public void blogLogin(){

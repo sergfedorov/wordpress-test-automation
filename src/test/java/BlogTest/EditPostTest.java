@@ -7,6 +7,7 @@ import BlogPO.ViewPostPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
@@ -15,10 +16,19 @@ public class EditPostTest extends BaseTest {
     String expectedTilte = "title update";
     String expectedDescription = "description update";
 
-    LoginPage loginPage = new LoginPage(driver);
-    PostsPage postsPage = new PostsPage(driver);
-    EditorPage editorPage = new EditorPage(driver);
-    ViewPostPage viewPage = new ViewPostPage(driver);
+    LoginPage loginPage;
+    PostsPage postsPage;
+    EditorPage editorPage;
+    ViewPostPage viewPage;
+
+    @BeforeTest
+    public void initBrowserAndPageObjects(){
+        driver = super.init();
+        loginPage = new LoginPage(driver);
+        postsPage = new PostsPage(driver);
+        editorPage = new EditorPage(driver);
+        viewPage = new ViewPostPage(driver);
+    }
 
     @BeforeClass
     public void blogLogin(){

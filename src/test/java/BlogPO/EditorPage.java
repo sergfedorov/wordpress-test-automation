@@ -11,9 +11,8 @@ import org.testng.Assert;
 
 import java.util.ArrayList;
 
-public class EditorPage{
+public class EditorPage extends Page{
 
-    WebDriver driver;
     @FindBy(how = How.CSS, using = ".editor-title>input")
     WebElement postTitleField;
     @FindBy(how = How.CSS, using = ".editor-ground-control__publish-button")
@@ -38,7 +37,7 @@ public class EditorPage{
 
     /***Constructor***/
     public EditorPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
         /*if (!driver.getCurrentUrl().contains("/post")) {
             throw new IllegalStateException("This is not New Post page, current page is: " + driver.getCurrentUrl());

@@ -18,7 +18,6 @@ public class Page{
         this.driver = driver;
     }
 
-
     public void customExplicitWait(WebElement elem){
         (new WebDriverWait(driver, explicitWaitTimeout)).until(ExpectedConditions.elementToBeClickable(elem));
     }

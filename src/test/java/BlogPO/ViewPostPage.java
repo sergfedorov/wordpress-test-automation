@@ -8,9 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 
-public class ViewPostPage {
+public class ViewPostPage extends Page {
 
-    WebDriver driver;
     @FindBy(how= How.CSS, using = ".entry-header")
     WebElement postTitle;
     @FindBy(how= How.CSS, using = ".entry-content>p")
@@ -22,7 +21,7 @@ public class ViewPostPage {
 
 
     public ViewPostPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 

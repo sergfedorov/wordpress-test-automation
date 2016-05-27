@@ -4,11 +4,9 @@ import BlogPO.EditorPage;
 import BlogPO.LoginPage;
 import BlogPO.PostsPage;
 import BlogPO.ViewPostPage;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 
 public class CreateNewPostTest extends BaseTest{
@@ -16,10 +14,19 @@ public class CreateNewPostTest extends BaseTest{
     String expectedTilteForNewPost = "new post title test";
     String expectedDescriptionForNewPost = "new description test";
 
-    LoginPage loginPage = new LoginPage(driver);
-    PostsPage postsPage = new PostsPage(driver);
-    EditorPage editorPage = new EditorPage(driver);
-    ViewPostPage viewPage = new ViewPostPage(driver);
+    LoginPage loginPage;
+    PostsPage postsPage;
+    EditorPage editorPage;
+    ViewPostPage viewPage;
+
+    @BeforeTest
+    public void initBrowserAndPageObjects(){
+        driver = super.init();
+        loginPage = new LoginPage(driver);
+        postsPage = new PostsPage(driver);
+        editorPage = new EditorPage(driver);
+        viewPage = new ViewPostPage(driver);
+    }
 
 
     @BeforeClass

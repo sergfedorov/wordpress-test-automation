@@ -14,8 +14,7 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class PostsPage{
-    WebDriver driver;
+public class PostsPage extends Page{
     String postsPageUrl = "https://wordpress.com/posts/sergeywebdrivertest.wordpress.com";
 
     @FindBy(className = "gridicons-create")
@@ -57,7 +56,7 @@ public class PostsPage{
 
     /***Constructor***/
     public PostsPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 

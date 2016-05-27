@@ -10,9 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginPage {
+public class LoginPage extends Page {
 
-    WebDriver driver;
+    //WebDriver driver;
 
     @FindBy(how= How.ID, using = "user_login")
     WebElement usernameField;
@@ -24,13 +24,15 @@ public class LoginPage {
     WebElement loginError;
 
     public LoginPage(WebDriver driver){
-        this.driver = driver;
+        //this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 
     public void navigate(){
         driver.get("https://sergeywebdrivertest.wordpress.com/wp-login.php");
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(submitLoginButton));
+        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(submitLoginButton));
+        super.customExplicitWait(submitLoginButton);
     }
 
     public void login(String username, String password){
