@@ -6,16 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class PostsPage extends Page{
-    String postsPageUrl = "https://wordpress.com/posts/sergeywebdrivertest.wordpress.com";
+    String PAGE_URL = "https://wordpress.com/posts/sergeywebdrivertest.wordpress.com";
 
     @FindBy(className = "gridicons-create")
     WebElement createNewPostLoc;
@@ -60,15 +57,9 @@ public class PostsPage extends Page{
         PageFactory.initElements(driver, this);
     }
 
-/*    public void customClick(WebElement elem){
-        super.customClick(elem);
-    }*/
-
     public void navigate() {
-        if (!driver.getCurrentUrl().equals(postsPageUrl)) {
-            driver.get(postsPageUrl);
-        }
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(filterByPublishedElem));
+        navigateToPageUrl(PAGE_URL);
+        customExplicitWait(filterByPublishedElem);
     }
 
     /***Filters***/
@@ -93,9 +84,7 @@ public class PostsPage extends Page{
     }
 
     public EditorPage clickCreatePost() {
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(createNewPostLoc));
-        createNewPostLoc.click();
-        //customClick(createNewPostLoc);
+        waitAndClick(createNewPostLoc);
         return PageFactory.initElements(driver, EditorPage.class);
     }
 
@@ -108,9 +97,7 @@ public class PostsPage extends Page{
     }
 
     public void deleteFirstPost() {
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(deleteFirstPostButton));
-        deleteFirstPostButton.click();
-        //customClick(deleteFirstPostButton);
+        waitAndClick(deleteFirstPostButton);
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(trashConfirmationAlert));
     }
 
@@ -119,9 +106,7 @@ public class PostsPage extends Page{
     }
 
     public EditorPage clickEditPost(){
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(editFirstPostButton));
-        editFirstPostButton.click();
-        //customClick(editFirstPostButton);
+        waitAndClick(editFirstPostButton);
         return PageFactory.initElements(driver, EditorPage.class);
     }
 

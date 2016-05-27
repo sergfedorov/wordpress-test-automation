@@ -44,10 +44,6 @@ public class EditorPage extends Page{
         }*/
     }
 
-/*    public void customClick(WebElement elem){
-        super.customClick(elem);
-    }*/
-
     public void createPost(String postTitleText, String postDescritpionText) {
         Assert.assertFalse(publishButton.isEnabled());
         Assert.assertEquals(publishButton.getText(), "Publish");
@@ -68,7 +64,7 @@ public class EditorPage extends Page{
     }
 
     public void editPost(String postTitleTextUpdate, String postDescritpionTextUpdate){
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(publishButton));
+        customExplicitWait(publishButton);
 
         Assert.assertTrue(publishButton.isEnabled());
         Assert.assertEquals(publishButton.getText(), "Update");

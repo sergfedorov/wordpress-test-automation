@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginPage extends Page {
 
-    //WebDriver driver;
+    String PAGE_URL = "https://sergeywebdrivertest.wordpress.com/wp-login.php";
 
     @FindBy(how= How.ID, using = "user_login")
     WebElement usernameField;
@@ -24,15 +24,13 @@ public class LoginPage extends Page {
     WebElement loginError;
 
     public LoginPage(WebDriver driver){
-        //this.driver = driver;
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
     public void navigate(){
-        driver.get("https://sergeywebdrivertest.wordpress.com/wp-login.php");
-        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(submitLoginButton));
-        super.customExplicitWait(submitLoginButton);
+        navigateToPageUrl(PAGE_URL);
+        customExplicitWait(submitLoginButton);
     }
 
     public void login(String username, String password){
