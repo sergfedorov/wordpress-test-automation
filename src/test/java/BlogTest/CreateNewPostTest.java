@@ -4,7 +4,6 @@ import BlogPO.EditorPage;
 import BlogPO.LoginPage;
 import BlogPO.PostsPage;
 import BlogPO.ViewPostPage;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 

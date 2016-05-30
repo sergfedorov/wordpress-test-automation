@@ -3,7 +3,7 @@
 <suite name="Default Suite">
   <test name="Wordpress">
     <classes>
-      <class name="BlogTest.EditPostTest"/>
+      <class name="BlogTest.DeletePostTest"/>
     </classes>
   </test> <!-- Wordpress -->
 </suite> <!-- Default Suite -->
