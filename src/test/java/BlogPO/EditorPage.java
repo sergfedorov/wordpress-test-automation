@@ -39,12 +39,13 @@ public class EditorPage extends Page{
     public EditorPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        /*if (!driver.getCurrentUrl().contains("/post")) {
+        if (!driver.getCurrentUrl().contains("/post")) {
             throw new IllegalStateException("This is not New Post page, current page is: " + driver.getCurrentUrl());
-        }*/
+        }
     }
 
     public void createPost(String postTitleText, String postDescritpionText) {
+
         Assert.assertFalse(publishButton.isEnabled());
         Assert.assertEquals(publishButton.getText(), "Publish");
 
@@ -78,9 +79,8 @@ public class EditorPage extends Page{
         publishButton.click();
     }
 
-    public ViewPostPage previewPost(){
+    public ViewPostPage openPreviewPost(){
         previewPostButton.click();
-        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(previewFrame));
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(previewFrame));
         driver.switchTo().frame(previewFrame);
         return PageFactory.initElements(driver, ViewPostPage.class);

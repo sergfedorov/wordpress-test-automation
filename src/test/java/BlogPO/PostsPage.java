@@ -88,12 +88,12 @@ public class PostsPage extends Page{
         return PageFactory.initElements(driver, EditorPage.class);
     }
 
-    public void testTitleInList(String expectedTitle){
-        Assert.assertEquals(postInListTitle.getText(), expectedTitle);
+    public String getPostTitleText(){
+        return postInListTitle.getText();
     }
 
-    public void testDescriptionInList(String expectedDescription){
-        Assert.assertEquals(postInListDescription.getText(), expectedDescription);
+    public String getPostDescriptionText(){
+        return postInListDescription.getText();
     }
 
     public void deleteFirstPost() {
@@ -113,7 +113,6 @@ public class PostsPage extends Page{
     public int numberOfPosts() {
         List<WebElement> postsList = driver.findElements(By.cssSelector("article.post"));
         return postsList.size();
-
     }
 
     public int postSearch(String searchText) {
@@ -126,7 +125,6 @@ public class PostsPage extends Page{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
         List<WebElement> resultsList = driver.findElements(By.cssSelector("article.post"));
         return resultsList.size();

@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class PostSearchTest extends BaseTest{
+public class SearchPostTest extends BaseTest{
 
     LoginPage loginPage;
     PostsPage postsPage;

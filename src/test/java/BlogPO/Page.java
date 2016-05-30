@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Page{
+public abstract class Page{
 
     WebDriver driver;
     private int explicitWaitTimeout = 5;
@@ -28,6 +28,8 @@ public class Page{
         customExplicitWait(elem);
         elem.click();
     }
+
+
 
 
 

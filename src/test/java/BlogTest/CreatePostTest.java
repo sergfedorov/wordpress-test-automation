@@ -8,10 +8,10 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 
-public class CreateNewPostTest extends BaseTest{
+public class CreatePostTest extends BaseTest{
 
-    String expectedTilteForNewPost = "new post title test";
-    String expectedDescriptionForNewPost = "new description test";
+    String EXPECTED_TITLE = "new post title test";
+    String EXPECTED_DESCRIPTION = "new description test";
 
     LoginPage loginPage;
     PostsPage postsPage;
@@ -27,7 +27,6 @@ public class CreateNewPostTest extends BaseTest{
         viewPage = new ViewPostPage(driver);
     }
 
-
     @BeforeClass
     public void blogLoginTest(){
         loginPage.login("editorwebdrivertest", "EditorTest");
@@ -37,7 +36,7 @@ public class CreateNewPostTest extends BaseTest{
     public void createPost(){
         postsPage.navigate();
         postsPage.clickCreatePost();
-        editorPage.createPost(expectedTilteForNewPost, expectedDescriptionForNewPost);
+        editorPage.createPost(EXPECTED_TITLE, EXPECTED_DESCRIPTION);
     }
 
     @AfterMethod
@@ -60,17 +59,16 @@ public class CreateNewPostTest extends BaseTest{
     @Test(priority = 3)
     public void verifyPublishedPost(){
         editorPage.viewPublishedPost();
-        viewPage.testTitle(expectedTilteForNewPost);
-        viewPage.testDescription(expectedDescriptionForNewPost);
+        Assert.assertEquals(viewPage.getTitleText(), EXPECTED_TITLE);
+        Assert.assertEquals(viewPage.getDescriptionText(), EXPECTED_DESCRIPTION);
     }
 
     @Test(priority = 4)
     public void verifyPostList(){
         postsPage.navigate();
         postsPage.filterByPublished();
-        postsPage.testTitleInList(expectedTilteForNewPost);
-        postsPage.testDescriptionInList(expectedDescriptionForNewPost);
-
+        Assert.assertEquals(postsPage.getPostTitleText(), EXPECTED_TITLE);
+        Assert.assertEquals(postsPage.getPostDescriptionText(), EXPECTED_DESCRIPTION);
     }
 
 

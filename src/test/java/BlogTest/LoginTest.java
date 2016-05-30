@@ -84,6 +84,7 @@ public class LoginTest extends BaseTest {
     public void loginPositiveUsernameTest(){
         loginPage.navigate();
         loginPage.login("editorwebdrivertest", "EditorTest");
+        Assert.assertFalse(loginPage.isErrorDisplayed());
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("wp-admin"));
         Assert.assertEquals(driver.getTitle(), "Dashboard ‹ sergeywebdrivertest — WordPress");
         dashboardPage.logOut();
@@ -93,6 +94,7 @@ public class LoginTest extends BaseTest {
     public void loginPositiveEmailTest(){
         loginPage.navigate();
         loginPage.login("fedorovbuzzfeed@gmail.com", "EditorTest");
+        Assert.assertFalse(loginPage.isErrorDisplayed());
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("wp-admin"));
         Assert.assertEquals(driver.getTitle(), "Dashboard ‹ sergeywebdrivertest — WordPress");
         dashboardPage.logOut();

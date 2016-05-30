@@ -24,13 +24,14 @@ public class DashboardPage extends Page{
 
     public void logOut(){
         userMenu.click();
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(signOutButton));
-        signOutButton.click();
+        waitAndClick(signOutButton);
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 
 

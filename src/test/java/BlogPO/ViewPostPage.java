@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 
 public class ViewPostPage extends Page {
@@ -25,12 +24,12 @@ public class ViewPostPage extends Page {
         PageFactory.initElements(driver, this);
     }
 
-    public void testTitle (String expectedTitle){
-        Assert.assertEquals(postTitle.getText(), expectedTitle);
+    public String getTitleText(){
+        return postTitle.getText();
     }
 
-    public void testDescription (String expectedDescription){
-        Assert.assertEquals(postDescription.getText(), expectedDescription);
+    public String getDescriptionText (){
+        return postDescription.getText();
     }
 
     public void addComment (String commentText){
