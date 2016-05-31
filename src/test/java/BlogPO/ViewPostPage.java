@@ -19,6 +19,7 @@ public class ViewPostPage extends Page {
     WebElement commentSubmit;
 
 
+
     public ViewPostPage(WebDriver driver){
         super(driver);
         PageFactory.initElements(driver, this);

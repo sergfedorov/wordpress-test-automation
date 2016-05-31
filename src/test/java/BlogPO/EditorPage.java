@@ -39,9 +39,6 @@ public class EditorPage extends Page{
     public EditorPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        if (!driver.getCurrentUrl().contains("/post")) {
-            throw new IllegalStateException("This is not New Post page, current page is: " + driver.getCurrentUrl());
-        }
     }
 
     public void createPost(String postTitleText, String postDescritpionText) {
