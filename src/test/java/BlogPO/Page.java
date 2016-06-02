@@ -29,8 +29,9 @@ public abstract class Page{
         elem.click();
     }
 
-
-
+    public void clearTheField(WebElement elem){
+        elem.clear();
+    }
 
 
 }

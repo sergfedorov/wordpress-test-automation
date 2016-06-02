@@ -35,22 +35,31 @@ public class LoginPage extends Page {
 
     public void login(String username, String password){
         this.navigate();
+        clearTheField(usernameField);
         usernameField.sendKeys(username);
+        clearTheField(passwordField);
         passwordField.sendKeys(password);
         submitLoginButton.click();
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("wp-admin"));
     }
 
     public void fillUsernameField(String username){
+        clearTheField(usernameField);
         usernameField.sendKeys(username);
     }
 
     public void fillPasswordField(String password){
+        clearTheField(passwordField);
         passwordField.sendKeys(password);
     }
 
     public void clickLogIn(){
         submitLoginButton.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public Boolean isErrorDisplayed(){
@@ -60,7 +69,5 @@ public class LoginPage extends Page {
     public String getErrorMessageText(){
         return loginError.getText();
     }
-
-
 
 }

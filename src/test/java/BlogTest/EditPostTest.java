@@ -23,7 +23,7 @@ public class EditPostTest extends BaseTest {
 
     @BeforeTest
     public void initBrowserAndPageObjects(){
-        driver = super.init();
+        driver = super.getDriver(getBrowserTypeFromProperty());
         loginPage = new LoginPage(driver);
         postsPage = new PostsPage(driver);
         editorPage = new EditorPage(driver);

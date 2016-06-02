@@ -3,7 +3,6 @@ package BlogTest;
 import BlogPO.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
@@ -21,7 +20,7 @@ public class SearchPostTest extends BaseTest{
 
     @BeforeTest
     public void initBrowserAndPageObjects(){
-        driver = super.init();
+        driver = super.getDriver(getBrowserTypeFromProperty());
         loginPage = new LoginPage(driver);
         postsPage = new PostsPage(driver);
         editorPage = new EditorPage(driver);

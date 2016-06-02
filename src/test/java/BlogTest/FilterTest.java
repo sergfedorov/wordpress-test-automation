@@ -4,7 +4,6 @@ import BlogPO.EditorPage;
 import BlogPO.LoginPage;
 import BlogPO.PostsPage;
 import BlogPO.ViewPostPage;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
@@ -19,7 +18,7 @@ public class FilterTest extends BaseTest{
 
     @BeforeTest
     public void initBrowserAndPageObjects(){
-        driver = super.init();
+        driver = super.getDriver(getBrowserTypeFromProperty());
         loginPage = new LoginPage(driver);
         postsPage = new PostsPage(driver);
         editorPage = new EditorPage(driver);
