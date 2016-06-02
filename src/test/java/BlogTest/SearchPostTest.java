@@ -12,20 +12,10 @@ import java.util.List;
 
 public class SearchPostTest extends BaseTest{
 
-    LoginPage loginPage;
-    PostsPage postsPage;
-    EditorPage editorPage;
-    ViewPostPage viewPage;
-    DashboardPage dashboardPage;
-
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        loginPage = new LoginPage(driver);
-        postsPage = new PostsPage(driver);
-        editorPage = new EditorPage(driver);
-        viewPage = new ViewPostPage(driver);
-        dashboardPage = new DashboardPage(driver);
+        pageObjectsInitializtion(driver);
     }
 
     @BeforeClass

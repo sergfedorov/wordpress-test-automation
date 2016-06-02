@@ -16,18 +16,10 @@ public class EditPostTest extends BaseTest {
     String EXPECTED_TITLE = "title update";
     String EXPECTED_DESCRIPTION = "description update";
 
-    LoginPage loginPage;
-    PostsPage postsPage;
-    EditorPage editorPage;
-    ViewPostPage viewPage;
-
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        loginPage = new LoginPage(driver);
-        postsPage = new PostsPage(driver);
-        editorPage = new EditorPage(driver);
-        viewPage = new ViewPostPage(driver);
+        pageObjectsInitializtion(driver);
     }
 
     @BeforeClass

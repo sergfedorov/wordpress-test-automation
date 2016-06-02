@@ -1,5 +1,6 @@
 package BlogTest;
 
+import BlogPO.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,6 +14,20 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest {
 
     WebDriver driver;
+
+    LoginPage loginPage;
+    PostsPage postsPage;
+    EditorPage editorPage;
+    ViewPostPage viewPage;
+    DashboardPage dashboardPage;
+
+    public void pageObjectsInitializtion(WebDriver driver){
+        loginPage = new LoginPage(driver);
+        postsPage = new PostsPage(driver);
+        editorPage = new EditorPage(driver);
+        viewPage = new ViewPostPage(driver);
+        dashboardPage = new DashboardPage(driver);
+    }
 
     public enum BrowserType {
         FIREFOX("firefox"),

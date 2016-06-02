@@ -1,6 +1,5 @@
 package BlogTest;
 
-import BlogPO.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -9,22 +8,11 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    LoginPage loginPage;
-    PostsPage postsPage;
-    EditorPage editorPage;
-    ViewPostPage viewPage;
-    DashboardPage dashboardPage;
-
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        loginPage = new LoginPage(driver);
-        postsPage = new PostsPage(driver);
-        editorPage = new EditorPage(driver);
-        viewPage = new ViewPostPage(driver);
-        dashboardPage = new DashboardPage(driver);
+        super.pageObjectsInitializtion(driver);
     }
-
 
     @Test(priority = 1)
     public void loginNegativeTest1(){

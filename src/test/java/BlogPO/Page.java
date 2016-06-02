@@ -12,6 +12,7 @@ public abstract class Page{
 
     public Page(WebDriver driver) {
         this.driver = driver;
+
     }
 
     public void navigateToPageUrl(String pageUrl){

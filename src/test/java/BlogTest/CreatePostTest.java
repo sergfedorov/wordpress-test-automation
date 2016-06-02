@@ -1,9 +1,5 @@
 package BlogTest;
 
-import BlogPO.EditorPage;
-import BlogPO.LoginPage;
-import BlogPO.PostsPage;
-import BlogPO.ViewPostPage;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -13,18 +9,10 @@ public class CreatePostTest extends BaseTest{
     String EXPECTED_TITLE = "new post title test";
     String EXPECTED_DESCRIPTION = "new description test";
 
-    LoginPage loginPage;
-    PostsPage postsPage;
-    EditorPage editorPage;
-    ViewPostPage viewPage;
-
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        loginPage = new LoginPage(driver);
-        postsPage = new PostsPage(driver);
-        editorPage = new EditorPage(driver);
-        viewPage = new ViewPostPage(driver);
+        pageObjectsInitializtion(driver);
     }
 
     @BeforeClass

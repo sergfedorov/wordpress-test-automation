@@ -1,6 +1,5 @@
 package BlogTest;
 
-import BlogPO.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -10,20 +9,10 @@ import org.testng.annotations.Test;
 
 public class DeletePostTest extends BaseTest{
 
-    LoginPage loginPage;
-    PostsPage postsPage;
-    EditorPage editorPage;
-    ViewPostPage viewPage;
-    DashboardPage dashboardPage;
-
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        loginPage = new LoginPage(driver);
-        postsPage = new PostsPage(driver);
-        editorPage = new EditorPage(driver);
-        viewPage = new ViewPostPage(driver);
-        dashboardPage = new DashboardPage(driver);
+        pageObjectsInitializtion(driver);
     }
 
     @BeforeClass
