@@ -1,6 +1,5 @@
 package BlogTest;
 
-import BlogPO.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -15,7 +14,7 @@ public class SearchPostTest extends BaseTest{
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        pageObjectsInitializtion(driver);
+        pageObjectsInitialization(driver);
     }
 
     @BeforeClass

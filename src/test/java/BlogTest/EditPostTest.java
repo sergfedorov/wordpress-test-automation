@@ -1,9 +1,5 @@
 package BlogTest;
 
-import BlogPO.EditorPage;
-import BlogPO.LoginPage;
-import BlogPO.PostsPage;
-import BlogPO.ViewPostPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -19,7 +15,7 @@ public class EditPostTest extends BaseTest {
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        pageObjectsInitializtion(driver);
+        pageObjectsInitialization(driver);
     }
 
     @BeforeClass

@@ -1,13 +1,22 @@
 package BlogTest;
 
 import BlogPO.*;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +30,7 @@ public class BaseTest {
     ViewPostPage viewPage;
     DashboardPage dashboardPage;
 
-    public void pageObjectsInitializtion(WebDriver driver){
+    public void pageObjectsInitialization(WebDriver driver){
         loginPage = new LoginPage(driver);
         postsPage = new PostsPage(driver);
         editorPage = new EditorPage(driver);
@@ -78,5 +87,16 @@ public class BaseTest {
             e.printStackTrace();
         }
         return type;
+    }
+
+    @AfterMethod
+    public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
+        DateFormat dateFormat = new SimpleDateFormat("dd_MMM_yyyy__hh_mm_ss");
+        Date date = new Date();
+
+        if (testResult.getStatus() == ITestResult.FAILURE) {
+            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile, new File("D:\\ScreenShots\\ScreenShot_"+ dateFormat.format(date)+".jpg"));
+        }
     }
 }

@@ -12,7 +12,7 @@ public class DeletePostTest extends BaseTest{
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        pageObjectsInitializtion(driver);
+        pageObjectsInitialization(driver);
     }
 
     @BeforeClass

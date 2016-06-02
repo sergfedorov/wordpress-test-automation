@@ -6,13 +6,15 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+
 public class LoginTest extends BaseTest {
 
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        super.pageObjectsInitializtion(driver);
+        super.pageObjectsInitialization(driver);
     }
+
 
     @Test(priority = 1)
     public void loginNegativeTest1(){
@@ -29,7 +31,7 @@ public class LoginTest extends BaseTest {
         loginPage.fillUsernameField("editorwebdrivertest");
         loginPage.fillPasswordField("");
         loginPage.clickLogIn();
-        Assert.assertEquals(loginPage.getErrorMessageText(), "ERROR: The password field is empty.");
+        Assert.assertEquals(loginPage.getErrorMessageText(), "1ERROR: The password field is empty.");
     }
 
     @Test(priority = 3)
@@ -38,7 +40,7 @@ public class LoginTest extends BaseTest {
         loginPage.fillUsernameField("");
         loginPage.fillPasswordField("somepass");
         loginPage.clickLogIn();
-        Assert.assertEquals(loginPage.getErrorMessageText(), "ERROR: The email or username field is empty.");
+        Assert.assertEquals(loginPage.getErrorMessageText(), "1ERROR: The email or username field is empty.");
     }
 
     @Test(priority = 4)
@@ -47,7 +49,7 @@ public class LoginTest extends BaseTest {
         loginPage.fillUsernameField("editorwebdrivertest123");
         loginPage.fillPasswordField("somepass");
         loginPage.clickLogIn();
-        Assert.assertEquals(loginPage.getErrorMessageText(), "ERROR: Invalid email or username. Lost your password?");
+        Assert.assertEquals(loginPage.getErrorMessageText(), "1ERROR: Invalid email or username. Lost your password?");
     }
 
     @Test(priority = 5)
