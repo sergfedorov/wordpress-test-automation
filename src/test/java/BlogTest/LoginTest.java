@@ -3,6 +3,7 @@ package BlogTest;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -49,7 +50,7 @@ public class LoginTest extends BaseTest {
         loginPage.fillUsernameField("editorwebdrivertest123");
         loginPage.fillPasswordField("somepass");
         loginPage.clickLogIn();
-        Assert.assertEquals(loginPage.getErrorMessageText(), "1ERROR: Invalid email or username. Lost your password?");
+        Assert.assertEquals(loginPage.getErrorMessageText(), "ERROR: Invalid email or username. Lost your password?");
     }
 
     @Test(priority = 5)

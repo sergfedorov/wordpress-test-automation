@@ -29,6 +29,7 @@ public class BaseTest {
     EditorPage editorPage;
     ViewPostPage viewPage;
     DashboardPage dashboardPage;
+    PublishedPostPage publishedPostPage;
 
     public void pageObjectsInitialization(WebDriver driver){
         loginPage = new LoginPage(driver);
@@ -36,6 +37,7 @@ public class BaseTest {
         editorPage = new EditorPage(driver);
         viewPage = new ViewPostPage(driver);
         dashboardPage = new DashboardPage(driver);
+        publishedPostPage = new PublishedPostPage(driver);
     }
 
     public enum BrowserType {
@@ -93,7 +95,6 @@ public class BaseTest {
     public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
         DateFormat dateFormat = new SimpleDateFormat("dd_MMM_yyyy__hh_mm_ss");
         Date date = new Date();
-
         if (testResult.getStatus() == ITestResult.FAILURE) {
             File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(scrFile, new File("D:\\ScreenShots\\ScreenShot_"+ dateFormat.format(date)+".jpg"));

@@ -15,22 +15,22 @@ public abstract class Page{
 
     }
 
-    public void navigateToPageUrl(String pageUrl){
+    protected void navigateToPageUrl(String pageUrl){
         if (!driver.getCurrentUrl().equals(pageUrl)) {
             driver.get(pageUrl);
         }
     }
 
-    public void customExplicitWait(WebElement elem){
+    protected void customExplicitWait(WebElement elem){
         (new WebDriverWait(driver, explicitWaitTimeout)).until(ExpectedConditions.elementToBeClickable(elem));
     }
 
-    public void waitAndClick(WebElement elem){
+    protected void waitAndClick(WebElement elem){
         customExplicitWait(elem);
         elem.click();
     }
 
-    public void clearTheField(WebElement elem){
+    protected void clearTheField(WebElement elem){
         elem.clear();
     }
 
