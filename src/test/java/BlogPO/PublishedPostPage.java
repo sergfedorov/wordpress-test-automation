@@ -3,6 +3,7 @@ package BlogPO;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,6 +27,19 @@ public class PublishedPostPage extends Page{
     WebElement shareFacebook;
     @FindBy(className = "share-google-plus-1")
     WebElement shareGoogle;
+
+    @FindBy(id = "comment")
+    WebElement commentField;
+    @FindBy(id = "comment-submit")
+    WebElement commentSubmit;
+    @FindBy(css = ".comment-form-email")
+    WebElement commentFormEmail;
+    @FindBy(css = ".comment-form-author")
+    WebElement commentFormAuthor;
+    @FindBy(css = ".comment-form-url")
+    WebElement commentFormURL;
+
+
 
     public PublishedPostPage(WebDriver driver){
         super(driver);
@@ -60,7 +74,7 @@ public class PublishedPostPage extends Page{
         shareGoogle.click();
     }
 
-    public String getPageURL(){
+    public String getNewWindowPageURL(){
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.numberOfWindowsToBe(2));
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));

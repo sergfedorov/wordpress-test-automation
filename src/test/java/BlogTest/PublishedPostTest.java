@@ -54,13 +54,13 @@ public class PublishedPostTest extends BaseTest{
     public void social(){
         publishedPostPage.navigate();
         publishedPostPage.clickShareTwitter();
-        Assert.assertTrue(publishedPostPage.getPageURL().contains("twitter"), "It is not Twitter");
+        Assert.assertTrue(publishedPostPage.getNewWindowPageURL().contains("twitter"), "It is not Twitter");
 
         publishedPostPage.clickShareFacebook();
-        Assert.assertTrue(publishedPostPage.getPageURL().contains("facebook"), "It is not Facebook");
+        Assert.assertTrue(publishedPostPage.getNewWindowPageURL().contains("facebook"), "It is not Facebook");
 
         publishedPostPage.clickshareGoogle();
-        Assert.assertTrue(publishedPostPage.getPageURL().contains("google"), "It is not Google");
+        Assert.assertTrue(publishedPostPage.getNewWindowPageURL().contains("google"), "It is not Google");
     }
 
 }
