@@ -34,5 +34,9 @@ public abstract class Page{
         elem.clear();
     }
 
+    protected String getText(WebElement element){
+        return element.getText();
+    }
+
 
 }

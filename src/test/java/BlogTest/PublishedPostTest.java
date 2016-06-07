@@ -16,11 +16,11 @@ public class PublishedPostTest extends BaseTest{
     public void verifyHomeLink(){
         publishedPostPage.navigate();
         publishedPostPage.clickHomeLink();
-        try {
+        /*try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         Assert.assertTrue(driver.getCurrentUrl().equalsIgnoreCase("https://sergeywebdrivertest.wordpress.com/"), "Actual URL is " + driver.getCurrentUrl());
     }
 
@@ -61,6 +61,19 @@ public class PublishedPostTest extends BaseTest{
 
         publishedPostPage.clickshareGoogle();
         Assert.assertTrue(publishedPostPage.getNewWindowPageURL().contains("google"), "It is not Google");
+    }
+
+    @Test
+    public void commentFormValidation(){
+        publishedPostPage.navigate();
+        publishedPostPage.clickCommentField();
+        publishedPostPage.clickPostComment();
+        Assert.assertTrue(publishedPostPage.isCommentFormEmailFieldValidated());
+        Assert.assertTrue(publishedPostPage.isCommentFormAuthorFieldValidated());
+        Assert.assertTrue(publishedPostPage.isCommentFormFieldValidated());
+        Assert.assertEquals(publishedPostPage.getTextCommentFormEmail(), "Please enter your email address here");
+        Assert.assertEquals(publishedPostPage.getTextCommentFormAuthor(), "Please enter your name here");
+
     }
 
 }
