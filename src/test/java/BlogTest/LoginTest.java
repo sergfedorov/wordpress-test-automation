@@ -32,7 +32,7 @@ public class LoginTest extends BaseTest {
         loginPage.fillUsernameField("editorwebdrivertest");
         loginPage.fillPasswordField("");
         loginPage.clickLogIn();
-        Assert.assertEquals(loginPage.getErrorMessageText(), "1ERROR: The password field is empty.");
+        Assert.assertEquals(loginPage.getErrorMessageText(), "ERROR: The password field is empty.");
     }
 
     @Test(priority = 3)
@@ -41,7 +41,7 @@ public class LoginTest extends BaseTest {
         loginPage.fillUsernameField("");
         loginPage.fillPasswordField("somepass");
         loginPage.clickLogIn();
-        Assert.assertEquals(loginPage.getErrorMessageText(), "1ERROR: The email or username field is empty.");
+        Assert.assertEquals(loginPage.getErrorMessageText(), "ERROR: The email or username field is empty.");
     }
 
     @Test(priority = 4)

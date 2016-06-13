@@ -65,15 +65,17 @@ public class PublishedPostPage extends Page {
 
     public void clickHomeLink() {
         homeLink.click();
-        waitForPage();
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlToBe("https://sergeywebdrivertest.wordpress.com/"));
     }
 
     public void clickAboutLink() {
         aboutLink.click();
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("about"));
     }
 
     public void clickContactLink() {
         contactLink.click();
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("contact"));
     }
 
     public void clickShareTwitter() {
@@ -88,25 +90,6 @@ public class PublishedPostPage extends Page {
         shareGoogle.click();
     }
 
-    public String getNewWindowPageURL() {
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.numberOfWindowsToBe(2));
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        //waitForPage();
-
-        String url = driver.getCurrentUrl();
-        driver.close();
-        driver.switchTo().window(tabs.get(0));
-
-        return url;
-    }
 
     public void clickCommentField() {
         Actions actions = new Actions(driver);
@@ -143,15 +126,23 @@ public class PublishedPostPage extends Page {
         return super.getText(commentFormAuthorLabel);
     }
 
-    public void waitForAttributeValue(final WebElement element, final String attributeName, final String attributeValue) {
-        (new WebDriverWait(driver, 5)).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                if (element.getAttribute(attributeName).equals(attributeValue))
-                    return true;
-                else
-                    return false;
-            }
-        });
+    public String getNewWindowPageURL() {
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.numberOfWindowsToBe(2));
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        String url = driver.getCurrentUrl();
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
+
+        return url;
     }
 
     public void waitForPage() {

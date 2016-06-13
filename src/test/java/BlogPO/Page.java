@@ -2,8 +2,11 @@ package BlogPO;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.ArrayList;
 
 public abstract class Page{
 
@@ -36,6 +39,17 @@ public abstract class Page{
 
     protected String getText(WebElement element){
         return element.getText();
+    }
+
+    protected void waitForAttributeValue(final WebElement element, final String attributeName, final String attributeValue) {
+        (new WebDriverWait(driver, 5)).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                if (element.getAttribute(attributeName).equals(attributeValue))
+                    return true;
+                else
+                    return false;
+            }
+        });
     }
 
 
