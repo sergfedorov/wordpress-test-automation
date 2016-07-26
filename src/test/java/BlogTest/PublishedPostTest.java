@@ -1,5 +1,6 @@
 package BlogTest;
 
+import BlogPO.Pages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -9,51 +10,51 @@ public class PublishedPostTest extends BaseTest{
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        pageObjectsInitialization(driver);
+        //pageObjectsInitialization(driver);
     }
 
     @Test
     public void verifyHomeLink(){
-        publishedPostPage.navigate();
-        publishedPostPage.clickHomeLink();
+        Pages.PublishedPostP().navigate();
+        Pages.PublishedPostP().clickHomeLink();
         Assert.assertEquals(driver.getTitle(), "sergeywebdrivertest");
     }
 
     @Test
     public void verifyAboutLink(){
-        publishedPostPage.navigate();
-        publishedPostPage.clickAboutLink();
+        Pages.PublishedPostP().navigate();
+        Pages.PublishedPostP().clickAboutLink();
         Assert.assertTrue(driver.getTitle().contains("About"), "Actual title is " + driver.getTitle());
     }
 
     @Test
     public void verifyContactLink(){
-        publishedPostPage.navigate();
-        publishedPostPage.clickContactLink();
+        Pages.PublishedPostP().navigate();
+        Pages.PublishedPostP().clickContactLink();
         Assert.assertTrue(driver.getTitle().contains("Contact"), "Actual title is " + driver.getTitle());
     }
 
     @Test(priority = 1)
     public void shares(){
-        publishedPostPage.navigate();
-        publishedPostPage.clickShareTwitter();
-        Assert.assertTrue(publishedPostPage.getNewWindowPageURL().contains("twitter"), "It is not Twitter");
-        publishedPostPage.clickShareFacebook();
-        Assert.assertTrue(publishedPostPage.getNewWindowPageURL().contains("facebook"), "It is not Facebook");
-        publishedPostPage.clickshareGoogle();
-        Assert.assertTrue(publishedPostPage.getNewWindowPageURL().contains("google"), "It is not Google");
+        Pages.PublishedPostP().navigate();
+        Pages.PublishedPostP().clickShareTwitter();
+        Assert.assertTrue(Pages.PublishedPostP().getNewWindowPageURL().contains("twitter"), "It is not Twitter");
+        Pages.PublishedPostP().clickShareFacebook();
+        Assert.assertTrue(Pages.PublishedPostP().getNewWindowPageURL().contains("facebook"), "It is not Facebook");
+        Pages.PublishedPostP().clickshareGoogle();
+        Assert.assertTrue(Pages.PublishedPostP().getNewWindowPageURL().contains("google"), "It is not Google");
     }
 
     @Test
     public void commentFormValidationNotLogged(){
-        publishedPostPage.navigate();
-        publishedPostPage.clickCommentField();
-        publishedPostPage.clickPostComment();
-        Assert.assertTrue(publishedPostPage.isCommentFormEmailFieldValidated());
-        Assert.assertTrue(publishedPostPage.isCommentFormAuthorFieldValidated());
-        Assert.assertTrue(publishedPostPage.isCommentFormFieldValidated());
-        Assert.assertEquals(publishedPostPage.getTextCommentFormEmail(), "Please enter your email address here");
-        Assert.assertEquals(publishedPostPage.getTextCommentFormAuthor(), "Please enter your name here");
+        Pages.PublishedPostP().navigate();
+        Pages.PublishedPostP().clickCommentField();
+        Pages.PublishedPostP().clickPostComment();
+        Assert.assertTrue(Pages.PublishedPostP().isCommentFormEmailFieldValidated());
+        Assert.assertTrue(Pages.PublishedPostP().isCommentFormAuthorFieldValidated());
+        Assert.assertTrue(Pages.PublishedPostP().isCommentFormFieldValidated());
+        Assert.assertEquals(Pages.PublishedPostP().getTextCommentFormEmail(), "Please enter your email address here");
+        Assert.assertEquals(Pages.PublishedPostP().getTextCommentFormAuthor(), "Please enter your name here");
     }
 
 }

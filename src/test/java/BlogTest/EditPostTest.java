@@ -1,5 +1,6 @@
 package BlogTest;
 
+import BlogPO.Pages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -15,33 +16,33 @@ public class EditPostTest extends BaseTest {
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        pageObjectsInitialization(driver);
+        //pageObjectsInitialization(driver);
     }
 
     @BeforeClass
     public void blogLogin(){
-        loginPage.login("editorwebdrivertest", "EditorTest");
+        Pages.LoginP().login("editorwebdrivertest", "EditorTest");
     }
 
     @BeforeMethod
     public void editPost(){
-        postsPage.navigate();
-        postsPage.clickEditPost();
-        editorPage.editPost(EXPECTED_TITLE, EXPECTED_DESCRIPTION);
+        Pages.PostsP().navigate();
+        Pages.PostsP().clickEditPost();
+        Pages.EditorP().editPost(EXPECTED_TITLE, EXPECTED_DESCRIPTION);
     }
 
     @Test(priority = 1)
     public void verifyPreview(){
-        editorPage.openPreviewPost();
-        Assert.assertEquals(viewPage.getTitleText(), EXPECTED_TITLE);
-        Assert.assertEquals(viewPage.getDescriptionText(), EXPECTED_DESCRIPTION);
+        Pages.EditorP().openPreviewPost();
+        Assert.assertEquals(Pages.ViewPostP().getTitleText(), EXPECTED_TITLE);
+        Assert.assertEquals(Pages.ViewPostP().getDescriptionText(), EXPECTED_DESCRIPTION);
     }
 
     @Test(priority = 2)
     public void verifyViewPublished(){
-        editorPage.viewPublishedPost();
-        Assert.assertEquals(viewPage.getTitleText(), EXPECTED_TITLE);
-        Assert.assertEquals(viewPage.getDescriptionText(), EXPECTED_DESCRIPTION);
+        Pages.EditorP().viewPublishedPost();
+        Assert.assertEquals(Pages.ViewPostP().getTitleText(), EXPECTED_TITLE);
+        Assert.assertEquals(Pages.ViewPostP().getDescriptionText(), EXPECTED_DESCRIPTION);
 
     }
 

@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
-    WebDriver driver;
+    public static WebDriver driver;
 
     LoginPage loginPage;
     PostsPage postsPage;
@@ -32,12 +32,12 @@ public class BaseTest {
     PublishedPostPage publishedPostPage;
 
     public void pageObjectsInitialization(WebDriver driver){
-        loginPage = new LoginPage(driver);
-        postsPage = new PostsPage(driver);
-        editorPage = new EditorPage(driver);
-        viewPage = new ViewPostPage(driver);
-        dashboardPage = new DashboardPage(driver);
-        publishedPostPage = new PublishedPostPage(driver);
+        //loginPage = new LoginPage(driver);
+        //postsPage = new PostsPage(driver);
+        //editorPage = new EditorPage(driver);
+        //viewPage = new ViewPostPage(driver);
+        //dashboardPage = new DashboardPage(driver);
+        //publishedPostPage = new PublishedPostPage(driver);
     }
 
     public enum BrowserType {

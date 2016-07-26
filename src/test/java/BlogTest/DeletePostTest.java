@@ -1,5 +1,6 @@
 package BlogTest;
 
+import BlogPO.Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -12,23 +13,23 @@ public class DeletePostTest extends BaseTest{
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        pageObjectsInitialization(driver);
+        //pageObjectsInitialization(driver);
     }
 
     @BeforeClass
     public void blogLogin(){
-        loginPage.login("editorwebdrivertest", "EditorTest");
+        Pages.LoginP().login("editorwebdrivertest", "EditorTest");
     }
 
     @Test
     public void trashPost(){
-        postsPage.navigate();
-        int trashCounterBeforeTrash = postsPage.trashCounter();
+        Pages.PostsP().navigate();
+        int trashCounterBeforeTrash = Pages.PostsP().trashCounter();
 
-        postsPage.deleteFirstPost();
+        Pages.PostsP().deleteFirstPost();
         WebElement trashConfirmationAlert = driver.findElement(By.cssSelector(".conf-alert"));
 
-        int trashCounterAfterTrash = postsPage.trashCounter();
+        int trashCounterAfterTrash = Pages.PostsP().trashCounter();
 
         Assert.assertTrue(trashConfirmationAlert.isDisplayed());
         Assert.assertEquals(trashCounterBeforeTrash, trashCounterAfterTrash-1);

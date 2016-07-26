@@ -1,5 +1,6 @@
 package BlogTest;
 
+import BlogPO.Pages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
@@ -10,26 +11,26 @@ public class FilterTest extends BaseTest{
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        pageObjectsInitialization(driver);
+        //pageObjectsInitialization(driver);
     }
 
     @BeforeClass
     public void blogLogin(){
-        loginPage.navigate();
-        loginPage.login("editorwebdrivertest", "EditorTest");
+        Pages.LoginP().navigate();
+        Pages.LoginP().login("editorwebdrivertest", "EditorTest");
     }
 
     @Test
     public void filterByMe(){
-        postsPage.navigate();
-        postsPage.filterByMe();
+        Pages.PostsP().navigate();
+        Pages.PostsP().filterByMe();
         Assert.assertTrue(driver.getCurrentUrl().contains("/posts/my/"));
     }
 
     @Test
     public void filterByEveryone(){
-        postsPage.navigate();
-        postsPage.filterByEveryone();
+        Pages.PostsP().navigate();
+        Pages.PostsP().filterByEveryone();
         Assert.assertFalse(driver.getCurrentUrl().contains("/posts/my/"));
     }
 }

@@ -1,5 +1,6 @@
 package BlogTest;
 
+import BlogPO.Pages;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -12,51 +13,51 @@ public class CreatePostTest extends BaseTest{
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        pageObjectsInitialization(driver);
+        //pageObjectsInitialization(driver);
     }
 
     @BeforeClass
     public void blogLoginTest(){
-        loginPage.login("editorwebdrivertest", "EditorTest");
+        Pages.LoginP().login("editorwebdrivertest", "EditorTest");
     }
 
     @BeforeMethod
     public void createPost(){
-        postsPage.navigate();
-        postsPage.clickCreatePost();
-        editorPage.createPost(EXPECTED_TITLE, EXPECTED_DESCRIPTION);
+        Pages.PostsP().navigate();
+        Pages.PostsP().clickCreatePost();
+        Pages.EditorP().createPost(EXPECTED_TITLE, EXPECTED_DESCRIPTION);
     }
 
     @AfterMethod
     public void deletePost(){
-        postsPage.navigate();
-        postsPage.deleteFirstPost();
+        Pages.PostsP().navigate();
+        Pages.PostsP().deleteFirstPost();
     }
 
     @Test(priority = 1)
     public void successBar(){
-        Assert.assertEquals(editorPage.getTextFromSuccessBar(), "Post published on");
-        Assert.assertEquals(editorPage.isSuccessBarDisplayed(), Boolean.TRUE);
+        Assert.assertEquals(Pages.EditorP().getTextFromSuccessBar(), "Post published on");
+        Assert.assertEquals(Pages.EditorP().isSuccessBarDisplayed(), Boolean.TRUE);
     }
 
     @Test(priority = 2)
     public void publishTime(){
-        Assert.assertEquals(editorPage.getPublishedTime(), "A MINUTE AGO");
+        Assert.assertEquals(Pages.EditorP().getPublishedTime(), "A MINUTE AGO");
     }
 
     @Test(priority = 3)
     public void verifyPublishedPost(){
-        editorPage.viewPublishedPost();
-        Assert.assertEquals(viewPage.getTitleText(), EXPECTED_TITLE);
-        Assert.assertEquals(viewPage.getDescriptionText(), EXPECTED_DESCRIPTION);
+        Pages.EditorP().viewPublishedPost();
+        Assert.assertEquals(Pages.ViewPostP().getTitleText(), EXPECTED_TITLE);
+        Assert.assertEquals(Pages.ViewPostP().getDescriptionText(), EXPECTED_DESCRIPTION);
     }
 
     @Test(priority = 4)
     public void verifyPostList(){
-        postsPage.navigate();
-        postsPage.filterByPublished();
-        Assert.assertEquals(postsPage.getPostTitleText(), EXPECTED_TITLE);
-        Assert.assertEquals(postsPage.getPostDescriptionText(), EXPECTED_DESCRIPTION);
+        Pages.PostsP().navigate();
+        Pages.PostsP().filterByPublished();
+        Assert.assertEquals(Pages.PostsP().getPostTitleText(), EXPECTED_TITLE);
+        Assert.assertEquals(Pages.PostsP().getPostDescriptionText(), EXPECTED_DESCRIPTION);
     }
 
 

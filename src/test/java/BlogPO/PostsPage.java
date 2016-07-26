@@ -52,10 +52,10 @@ public class PostsPage extends Page{
 
 
     /***Constructor***/
-    public PostsPage(WebDriver driver) {
+/*    public PostsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-    }
+    }*/
 
     public void navigate() {
         navigateToPageUrl(PAGE_URL);

@@ -1,5 +1,6 @@
 package BlogPO;
 
+import BlogTest.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -12,6 +13,12 @@ public abstract class Page{
 
     WebDriver driver;
     private int explicitWaitTimeout = 5;
+
+
+
+    public Page(){
+        this.driver = BaseTest.driver;
+    }
 
     public Page(WebDriver driver) {
         this.driver = driver;

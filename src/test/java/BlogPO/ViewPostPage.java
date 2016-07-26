@@ -20,10 +20,10 @@ public class ViewPostPage extends Page {
 
 
 
-    public ViewPostPage(WebDriver driver){
+/*    public ViewPostPage(WebDriver driver){
         super(driver);
         PageFactory.initElements(driver, this);
-    }
+    }*/
 
     public String getTitleText(){
         return postTitle.getText();

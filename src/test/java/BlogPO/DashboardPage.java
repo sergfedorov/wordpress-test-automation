@@ -16,11 +16,10 @@ public class DashboardPage extends Page{
     @FindBy(className = "ab-sign-out")
     WebElement signOutButton;
 
-
-    public DashboardPage(WebDriver driver){
+/*    public DashboardPage(WebDriver driver){
         super(driver);
         PageFactory.initElements(driver, this);
-    }
+    }*/
 
     public void logOut(){
         userMenu.click();

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class EditorPage extends Page{
 
-    @FindBy(how = How.CSS, using = ".editor-title>input")
+    @FindBy(how = How.CSS, using = ".editor-title__input")
     WebElement postTitleField;
     @FindBy(how = How.CSS, using = ".editor-ground-control__publish-button")
     WebElement publishButton;
@@ -29,17 +29,17 @@ public class EditorPage extends Page{
     WebElement previewFrame;
     @FindBy(css = ".notice__action>span")
     WebElement viewPostButton;
-    @FindBy(css = ".is-success>div>span>span")
+    @FindBy(css = ".is-success>div>span")
     WebElement publishedSuccessfullyText;
-    @FindBy(css = ".editor-status-label>span")
+    @FindBy(css = ".editor-status-label")
     WebElement publishedTime;
 
 
     /***Constructor***/
-    public EditorPage(WebDriver driver) {
+/*    public EditorPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-    }
+    }*/
 
     public void createPost(String postTitleText, String postDescritpionText) {
 
