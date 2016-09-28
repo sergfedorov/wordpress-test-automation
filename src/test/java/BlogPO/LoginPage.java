@@ -23,6 +23,15 @@ public class LoginPage extends Page {
     @FindBy(id = "login_error")
     WebElement loginError;
 
+/*    public LoginPage(){
+
+    }*/
+
+    /*public LoginPage(WebDriver driver){
+        super(driver);
+        //PageFactory.initElements(driver, this);
+    }*/
+
     public void navigate(){
         navigateToPageUrl(PAGE_URL);
         customExplicitWait(submitLoginButton);

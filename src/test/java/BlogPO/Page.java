@@ -20,10 +20,10 @@ public abstract class Page{
         this.driver = BaseTest.driver;
     }
 
-    public Page(WebDriver driver) {
+/*    public Page(WebDriver driver) {
         this.driver = driver;
 
-    }
+    }*/
 
     protected void navigateToPageUrl(String pageUrl){
         if (!driver.getCurrentUrl().equals(pageUrl)) {

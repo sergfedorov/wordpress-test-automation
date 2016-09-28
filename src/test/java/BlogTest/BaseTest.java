@@ -24,7 +24,7 @@ public class BaseTest {
 
     public static WebDriver driver;
 
-    LoginPage loginPage;
+    /*LoginPage loginPage;
     PostsPage postsPage;
     EditorPage editorPage;
     ViewPostPage viewPage;
@@ -32,13 +32,13 @@ public class BaseTest {
     PublishedPostPage publishedPostPage;
 
     public void pageObjectsInitialization(WebDriver driver){
-        //loginPage = new LoginPage(driver);
-        //postsPage = new PostsPage(driver);
-        //editorPage = new EditorPage(driver);
-        //viewPage = new ViewPostPage(driver);
-        //dashboardPage = new DashboardPage(driver);
-        //publishedPostPage = new PublishedPostPage(driver);
-    }
+        loginPage = new LoginPage(driver);
+        postsPage = new PostsPage(driver);
+        editorPage = new EditorPage(driver);
+        viewPage = new ViewPostPage(driver);
+        dashboardPage = new DashboardPage(driver);
+        publishedPostPage = new PublishedPostPage(driver);
+    }*/
 
     public enum BrowserType {
         FIREFOX("firefox"),
