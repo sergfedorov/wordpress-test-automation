@@ -54,6 +54,7 @@ public class BaseTest {
         }
     }
 
+    // Take enum BrowserType (firefox or chrome) as input parameter and initialize the WebDriver
     public WebDriver getDriver(BrowserType browserType) {
         switch (browserType) {
             case FIREFOX:
@@ -72,6 +73,7 @@ public class BaseTest {
         return driver;
     }
 
+    // Read the properties file and return enum BrowserType (firefox or chrome) from it
     public BrowserType getBrowserTypeFromProperty() {
         BrowserType type = null;
         try {
@@ -91,6 +93,7 @@ public class BaseTest {
         return type;
     }
 
+    // Take a screenshot in case of failure and save it
     @AfterMethod
     public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
         DateFormat dateFormat = new SimpleDateFormat("dd_MMM_yyyy__hh_mm_ss");
