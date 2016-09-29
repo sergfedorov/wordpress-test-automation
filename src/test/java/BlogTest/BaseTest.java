@@ -1,6 +1,5 @@
 package BlogTest;
 
-import BlogPO.*;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -12,7 +11,6 @@ import org.testng.annotations.AfterMethod;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,22 +21,6 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest {
 
     public static WebDriver driver;
-
-    /*LoginPage loginPage;
-    PostsPage postsPage;
-    EditorPage editorPage;
-    ViewPostPage viewPage;
-    DashboardPage dashboardPage;
-    PublishedPostPage publishedPostPage;
-
-    public void pageObjectsInitialization(WebDriver driver){
-        loginPage = new LoginPage(driver);
-        postsPage = new PostsPage(driver);
-        editorPage = new EditorPage(driver);
-        viewPage = new ViewPostPage(driver);
-        dashboardPage = new DashboardPage(driver);
-        publishedPostPage = new PublishedPostPage(driver);
-    }*/
 
     public enum BrowserType {
         FIREFOX("firefox"),
@@ -54,7 +36,7 @@ public class BaseTest {
         }
     }
 
-    // Take enum BrowserType (firefox or chrome) as input parameter and initialize the WebDriver
+    // Take enum BrowserType (firefox or chrome) as input parameter and return initialized WebDriver
     public WebDriver getDriver(BrowserType browserType) {
         switch (browserType) {
             case FIREFOX:

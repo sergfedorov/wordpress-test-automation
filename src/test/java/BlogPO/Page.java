@@ -14,8 +14,6 @@ public abstract class Page{
     WebDriver driver;
     private int explicitWaitTimeout = 5;
 
-
-
     public Page(){
         this.driver = BaseTest.driver;
     }

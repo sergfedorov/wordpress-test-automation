@@ -4,8 +4,10 @@ import BlogTest.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+//
 public class Pages {
 
+    // Take the PO class as input parameter, initialize its elements and return the PO with already initialized elements
     public static  <T> T GetPage(Class<T> cls) {
         T page = null;
         try {
