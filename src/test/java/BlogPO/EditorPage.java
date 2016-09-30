@@ -83,7 +83,7 @@ public class EditorPage extends Page{
         return PageFactory.initElements(driver, ViewPostPage.class);
     }
 
-    public ViewPostPage viewPublishedPost(){
+    public ViewPostPage viewPublishedPostInNewTab(){
         viewPostButton.click();
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.numberOfWindowsToBe(2));
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());

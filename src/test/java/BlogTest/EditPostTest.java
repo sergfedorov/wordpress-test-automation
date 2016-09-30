@@ -40,7 +40,7 @@ public class EditPostTest extends BaseTest {
 
     @Test(priority = 2)
     public void verifyViewPublished(){
-        Pages.EditorP().viewPublishedPost();
+        Pages.EditorP().viewPublishedPostInNewTab();
         Assert.assertEquals(Pages.ViewPostP().getTitleText(), EXPECTED_TITLE);
         Assert.assertEquals(Pages.ViewPostP().getDescriptionText(), EXPECTED_DESCRIPTION);
 

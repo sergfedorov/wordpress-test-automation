@@ -28,12 +28,6 @@ public class CreatePostTest extends BaseTest{
         Pages.EditorP().createPost(EXPECTED_TITLE, EXPECTED_DESCRIPTION);
     }
 
-    @AfterMethod
-    public void deletePost(){
-        Pages.PostsP().navigate();
-        Pages.PostsP().deleteFirstPost();
-    }
-
     @Test(priority = 1)
     public void successBar(){
         Assert.assertEquals(Pages.EditorP().getTextFromSuccessBar(), "Post published on");
@@ -47,7 +41,7 @@ public class CreatePostTest extends BaseTest{
 
     @Test(priority = 3)
     public void verifyPublishedPost(){
-        Pages.EditorP().viewPublishedPost();
+        Pages.EditorP().viewPublishedPostInNewTab();
         Assert.assertEquals(Pages.ViewPostP().getTitleText(), EXPECTED_TITLE);
         Assert.assertEquals(Pages.ViewPostP().getDescriptionText(), EXPECTED_DESCRIPTION);
     }
@@ -58,6 +52,12 @@ public class CreatePostTest extends BaseTest{
         Pages.PostsP().filterByPublished();
         Assert.assertEquals(Pages.PostsP().getPostTitleText(), EXPECTED_TITLE);
         Assert.assertEquals(Pages.PostsP().getPostDescriptionText(), EXPECTED_DESCRIPTION);
+    }
+
+    @AfterMethod
+    public void deletePost(){
+        Pages.PostsP().navigate();
+        Pages.PostsP().deleteFirstPost();
     }
 
 
