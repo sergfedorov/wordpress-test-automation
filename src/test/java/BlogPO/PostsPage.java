@@ -131,6 +131,10 @@ public class PostsPage extends Page{
 
     }
 
+    public Boolean isTrashConfirmationAlertDisplayed(){
+        return trashConfirmationAlert.isDisplayed();
+    }
+
 
 
 
