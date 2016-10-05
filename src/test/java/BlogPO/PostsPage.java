@@ -14,6 +14,7 @@ import java.util.List;
 public class PostsPage extends Page{
     String PAGE_URL = "https://wordpress.com/posts/sergeywebdrivertest.wordpress.com";
 
+    //test
     @FindBy(className = "gridicons-create")
     WebElement createNewPostLoc;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__trash']")
