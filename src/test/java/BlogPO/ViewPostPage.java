@@ -38,4 +38,7 @@ public class ViewPostPage extends Page {
         commentSubmit.click();
     }
 
+    public String getPageTitleText(){
+        return driver.getTitle();
+    }
 }

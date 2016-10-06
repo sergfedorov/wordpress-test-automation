@@ -1,20 +1,18 @@
 package BlogPO;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PostsPage extends Page{
     String PAGE_URL = "https://wordpress.com/posts/sergeywebdrivertest.wordpress.com";
 
-    //test
     @FindBy(className = "gridicons-create")
     WebElement createNewPostLoc;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__trash']")
@@ -33,10 +31,22 @@ public class PostsPage extends Page{
     WebElement trashCounterElem;
     @FindBy(css = ".conf-alert")
     WebElement trashConfirmationAlert;
+    @FindBy(xpath = "//div[@class='posts_list']//article[1]//span[@class='post-relative-time-status__status-text']")
+    WebElement TrashedLabel;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//h4[@class='post__title']")
     WebElement postInListTitle;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//div[@class='post-excerpt']")
     WebElement postInListDescription;
+    @FindBy(xpath = "//div[@class='posts__list']//article[1]//a[@class='post-controls__trash is-scary']")
+    WebElement deletePermanentlyButton;
+    @FindBy(css = "span.conf-alert_title")
+    WebElement postDeletedAlert;
+    @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__view']")
+    WebElement viewPostButton;
+
+
+
+
 
 
     /***Filter locators***/
@@ -136,8 +146,45 @@ public class PostsPage extends Page{
         return trashConfirmationAlert.isDisplayed();
     }
 
+    public void deletePostPermanently(){
+        waitAndClick(deletePermanentlyButton);
+    }
 
+    public void acceptDeletePermanentlyAlert(){
+        try {
+            Alert confirmationAlert = driver.switchTo().alert();
+            String alertText = confirmationAlert.getText();
+            Assert.assertEquals(alertText, "Delete this post permanently?");
+            confirmationAlert.accept();
+            driver.switchTo().defaultContent();
 
+        } catch (NoAlertPresentException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public Boolean isPostDeletedAlertDisplayed(){
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(postDeletedAlert));
+        return postDeletedAlert.isDisplayed();
+    }
+
+    public String getPostDeletedAlertText(){
+        return postDeletedAlert.getText();
+    }
+
+    public void clickViewPostButton(){
+        super.waitAndClick(viewPostButton);
+    }
+
+    public void viewFirstPost(){
+        super.waitAndClick(viewPostButton);
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.numberOfWindowsToBe(2));
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        Assert.assertNotEquals(Pages.ViewPostP().getPageTitleText() , "Page not found – sergeywebdrivertest");
+        driver.switchTo().window(tabs.get(0));
+    }
 
 
 }
