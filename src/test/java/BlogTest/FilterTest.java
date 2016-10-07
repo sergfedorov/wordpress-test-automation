@@ -11,7 +11,6 @@ public class FilterTest extends BaseTest{
     @BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-        //pageObjectsInitialization(driver);
     }
 
     @BeforeClass

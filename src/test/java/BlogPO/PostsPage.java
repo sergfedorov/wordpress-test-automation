@@ -182,9 +182,16 @@ public class PostsPage extends Page{
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.numberOfWindowsToBe(2));
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
-        Assert.assertNotEquals(Pages.ViewPostP().getPageTitleText() , "Page not found – sergeywebdrivertest");
-        driver.switchTo().window(tabs.get(0));
     }
+
+    public void openTrashedPost(){
+        String trashedPostUrl = viewPostButton.getAttribute("href");
+        deleteFirstPost();
+        driver.get(trashedPostUrl);
+    }
+
+
+
 
 
 }

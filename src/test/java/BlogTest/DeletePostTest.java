@@ -53,9 +53,8 @@ public class DeletePostTest extends BaseTest{
     @Test(priority = 3)
     public void trashedPostPage(){
         Pages.PostsP().navigate();
-        Pages.PostsP().viewFirstPost();
-
-        Pages.PostsP().deleteFirstPost();
+        Pages.PostsP().openTrashedPost();
+        Assert.assertEquals(Pages.ViewPostP().getPageTitleText() , "Page not found – sergeywebdrivertest");
     }
 
 }
