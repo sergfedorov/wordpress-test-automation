@@ -59,6 +59,9 @@ public class LoginPage extends Page {
 
     public void clickLogIn(){
         submitLoginButton.click();
+
+        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("wp-admin"));
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

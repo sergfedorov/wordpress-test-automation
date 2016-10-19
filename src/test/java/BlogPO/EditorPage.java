@@ -34,13 +34,6 @@ public class EditorPage extends Page{
     @FindBy(css = ".editor-status-label")
     WebElement publishedTime;
 
-
-    /***Constructor***/
-/*    public EditorPage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
-    }*/
-
     public void createPost(String postTitleText, String postDescritpionText) {
 
         Assert.assertFalse(publishButton.isEnabled());

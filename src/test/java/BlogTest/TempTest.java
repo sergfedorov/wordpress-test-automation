@@ -1,6 +1,7 @@
 package BlogTest;
 
 import BlogPO.LoginPage;
+import BlogPO.Pages;
 import BlogPO.PostsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,6 +11,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
@@ -17,39 +20,27 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class TempTest{
+public class TempTest extends BaseTest {
 
-    public static void main(String[] args) {
-        WebDriver driver;
-        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
-        driver = new ChromeDriver();
+    @BeforeTest
+    public void initBrowserAndPageObjects() {
+        driver = super.getDriver(getBrowserTypeFromProperty());
+    }
 
-        driver.get("https://sergeywebdrivertest.wordpress.com/2016/05/17/new-post-title-test-12/");
-        driver.findElement(By.id("comment")).click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //driver.findElement(By.cssSelector(".form-submit")).click();
+    @BeforeClass
+    public void blogLoginTest() {
+        Pages.LoginP().login("editorwebdrivertest", "EditorTest");
+    }
 
-        WebElement element = driver.findElement(By.cssSelector(".form-submit"));
+    String EXPECTED_TITLE = "new post title test";
+    String EXPECTED_DESCRIPTION = "new description test";
 
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element);
-        actions.click();
-        actions.perform();
-
-
-        /*((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        element.click();*/
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(driver.findElement(By.xpath("//label[@for='email']")).getAttribute("class"));
+    @Test
+     public void createPost(){
+        Pages.PostsP().navigate();
+        Pages.PostsP().clickCreatePost();
+        Pages.EditorP().createPost(EXPECTED_TITLE, EXPECTED_DESCRIPTION);
+        Pages.EditorP().viewPublishedPostInNewTab();
     }
 
 }

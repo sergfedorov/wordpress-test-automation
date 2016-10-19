@@ -73,7 +73,7 @@ public class LoginTest extends BaseTest {
     @Test(priority = 7)
     public void loginPositiveUsernameTest(){
         Pages.LoginP().navigate();
-        Pages.LoginP().login("editorwebdrivertest", "EditorTest");
+        Pages.LoginP().login("editorwebdrivertest1", "EditorTest");
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("wp-admin"));
         Assert.assertEquals(driver.getTitle(), "Dashboard ‹ sergeywebdrivertest — WordPress");
         Pages.DashboardP().logOut();

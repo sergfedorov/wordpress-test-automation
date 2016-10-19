@@ -131,6 +131,8 @@ public class PublishedPostPage extends Page {
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
+        //(new WebDriverWait(driver, 5)).until(ExpectedConditions.);
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
