@@ -77,4 +77,10 @@ public class LoginPage extends Page {
         return loginError.getText();
     }
 
+    public String getCurrentPageUrl(){
+        return driver.getCurrentUrl();
+    }
+
+    //public void waitFor
+
 }

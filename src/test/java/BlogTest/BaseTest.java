@@ -22,6 +22,18 @@ public class BaseTest {
 
     public static WebDriver driver;
 
+    /*public static WebDriver getWebDriverInstance(){
+        if(driver == null){
+            WebDriver driver = getDriver(getBrowserTypeFromProperty());
+        }
+        return driver;
+    }*/
+
+    public BaseTest(){
+        driver = getDriver(getBrowserTypeFromProperty());
+    }
+
+
     public enum BrowserType {
         FIREFOX("firefox"),
         CHROME("chrome");
@@ -37,7 +49,7 @@ public class BaseTest {
     }
 
     // Take enum BrowserType (firefox or chrome) as input parameter and return initialized WebDriver
-    public WebDriver getDriver(BrowserType browserType) {
+    public static WebDriver getDriver(BrowserType browserType) {
         switch (browserType) {
             case FIREFOX:
                 driver = new FirefoxDriver();
@@ -56,7 +68,7 @@ public class BaseTest {
     }
 
     // Read the properties file and return enum BrowserType (firefox or chrome) from it
-    public BrowserType getBrowserTypeFromProperty() {
+    public static BrowserType getBrowserTypeFromProperty() {
         BrowserType type = null;
         try {
             FileInputStream file = new FileInputStream("wordpress.properties");

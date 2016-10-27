@@ -18,6 +18,8 @@ public abstract class Page{
         this.driver = BaseTest.driver;
     }
 
+
+
     protected void navigateToPageUrl(String pageUrl){
         if (!driver.getCurrentUrl().equals(pageUrl)) {
             driver.get(pageUrl);

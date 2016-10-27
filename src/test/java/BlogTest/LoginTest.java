@@ -1,20 +1,20 @@
 package BlogTest;
 
 import BlogPO.Pages;
+import Util.ExcelReader;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
 public class LoginTest extends BaseTest {
 
-    @BeforeTest
+    /*@BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
-    }
+    }*/
 
     @Test(priority = 1)
     public void loginNegativeTest1() {
@@ -22,7 +22,7 @@ public class LoginTest extends BaseTest {
         Pages.LoginP().fillUsernameField("");
         Pages.LoginP().fillPasswordField("");
         Pages.LoginP().clickLogIn();
-        Assert.assertEquals(driver.getCurrentUrl(), "https://sergeywebdrivertest.wordpress.com/wp-login.php");
+        Assert.assertEquals(Pages.LoginP().getCurrentPageUrl(), "https://sergeywebdrivertest.wordpress.com/wp-login.php");
     }
 
     @Test(priority = 2)
@@ -73,7 +73,7 @@ public class LoginTest extends BaseTest {
     @Test(priority = 7)
     public void loginPositiveUsernameTest(){
         Pages.LoginP().navigate();
-        Pages.LoginP().login("editorwebdrivertest1", "EditorTest");
+        Pages.LoginP().login("editorwebdrivertest", "EditorTest");
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("wp-admin"));
         Assert.assertEquals(driver.getTitle(), "Dashboard ‹ sergeywebdrivertest — WordPress");
         Pages.DashboardP().logOut();
@@ -86,6 +86,21 @@ public class LoginTest extends BaseTest {
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("wp-admin"));
         Assert.assertEquals(driver.getTitle(), "Dashboard ‹ sergeywebdrivertest — WordPress");
         Pages.DashboardP().logOut();
+    }
+
+    @Test(priority = 9, dataProvider="userCreds")
+    public void loginNegativeTestUsingExcel(String userName, String userPass, String expectedResult){
+        Pages.LoginP().navigate();
+        Pages.LoginP().fillUsernameField(userName);
+        Pages.LoginP().fillPasswordField(userPass);
+        Pages.LoginP().clickLogIn();
+        Assert.assertEquals(Pages.LoginP().getErrorMessageText(), expectedResult);
+    }
+
+    @DataProvider
+    public Object[][] userCreds(){
+        Object[][] testDataArray = ExcelReader.excelConverter();
+        return (testDataArray);
     }
 
 }
