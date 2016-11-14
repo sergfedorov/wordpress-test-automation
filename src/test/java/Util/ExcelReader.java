@@ -9,15 +9,15 @@ import java.io.IOException;
 
 public class ExcelReader {
 
-    public static Object[][] excelConverter() {
+    public static Object[][] excelConverter(String filePath, String sheetName) {
 
         String[][] sheetArray = null;
 
         try {
 
-            FileInputStream fis = new FileInputStream("D:\\testdata.xls");
+            FileInputStream fis = new FileInputStream(filePath);
             HSSFWorkbook wb = new HSSFWorkbook(fis);
-            HSSFSheet sheet = wb.getSheet("testdata");
+            HSSFSheet sheet = wb.getSheet(sheetName);
 
             int numberOfColumns = sheet.getRow(0).getLastCellNum();
             int numberOfRows = sheet.getLastRowNum();

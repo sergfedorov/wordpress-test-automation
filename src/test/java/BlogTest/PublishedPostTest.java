@@ -7,11 +7,11 @@ import org.testng.annotations.Test;
 
 public class PublishedPostTest extends BaseTest{
 
-    @BeforeTest
+    /*@BeforeTest
     public void initBrowserAndPageObjects(){
         driver = super.getDriver(getBrowserTypeFromProperty());
         //pageObjectsInitialization(driver);
-    }
+    }*/
 
     @Test
     public void verifyHomeLink(){

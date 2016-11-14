@@ -19,6 +19,11 @@ public abstract class Page{
     }
 
 
+    protected void fillTheField(WebElement elem, String data){
+        elem.sendKeys(data);
+    }
+
+
 
     protected void navigateToPageUrl(String pageUrl){
         if (!driver.getCurrentUrl().equals(pageUrl)) {

@@ -99,8 +99,7 @@ public class LoginTest extends BaseTest {
 
     @DataProvider
     public Object[][] userCreds(){
-        Object[][] testDataArray = ExcelReader.excelConverter();
+        Object[][] testDataArray = ExcelReader.excelConverter("testdata.xls", "testdata");
         return (testDataArray);
     }
-
 }

@@ -3,7 +3,7 @@
 <suite name="Default Suite">
   <test name="Wordpress">
     <classes>
-      <class name="BlogTest.LoginTest"/>
+      <class name="BlogTest.FilterTest"/>
     </classes>
   </test> <!-- Wordpress -->
 </suite> <!-- Default Suite -->

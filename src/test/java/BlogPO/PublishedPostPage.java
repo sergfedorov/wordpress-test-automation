@@ -17,7 +17,7 @@ import java.util.function.Predicate;
 
 public class PublishedPostPage extends Page {
 
-    String PAGE_URL = "https://sergeywebdrivertest.wordpress.com/2016/05/17/new-post-title-test-8/";
+    String PAGE_URL = "https://sergeywebdrivertest.wordpress.com/2016/11/01/aasd/";
 
     @FindBy(id = "menu-item-5")
     WebElement homeLink;
