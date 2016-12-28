@@ -70,7 +70,7 @@ public class PostsPage extends Page{
 
     public void navigate() {
         navigateToPageUrl(PAGE_URL);
-        customExplicitWait(filterByPublishedElem);
+        customExplicitWait(editFirstPostButton);
     }
 
     /***Filters***/

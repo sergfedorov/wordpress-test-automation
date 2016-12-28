@@ -2,11 +2,9 @@ package tests;
 
 import util.Pages;
 import util.BaseTest;
-import util.CustomReaders;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
@@ -84,7 +82,7 @@ public class LoginTest extends BaseTest {
         Pages.dashboardP().logOut();
     }
 
-    @Test(priority = 9, dataProvider="userCreds")
+    @Test(priority = 9, dataProvider="userCreds", enabled = false)
     public void loginNegativeTestUsingExcel(String userName, String userPass, String expectedResult){
         Pages.loginP().navigate();
         Pages.loginP().fillUsernameField(userName);
@@ -93,9 +91,4 @@ public class LoginTest extends BaseTest {
         Assert.assertEquals(Pages.loginP().getErrorMessageText(), expectedResult);
     }
 
-    @DataProvider
-    public Object[][] userCreds(){
-        Object[][] testDataArray = CustomReaders.excelConverter("src/test/resources/testdata/testdata.xls", "testdata");
-        return (testDataArray);
-    }
 }

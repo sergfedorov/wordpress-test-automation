@@ -17,12 +17,9 @@ public abstract class Page{
         this.driver = Driver.getInstance();
     }
 
-
     protected void fillTheField(WebElement elem, String data){
         elem.sendKeys(data);
     }
-
-
 
     protected void navigateToPageUrl(String pageUrl){
         if (!driver.getCurrentUrl().equals(pageUrl)) {
@@ -57,8 +54,5 @@ public abstract class Page{
             }
         });
     }
-
-
-
 
 }

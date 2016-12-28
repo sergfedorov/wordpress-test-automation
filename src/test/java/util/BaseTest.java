@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class BaseTest {
     }
 
     // Take a screenshot in case of failure and save it
-    @AfterMethod
+/*    @AfterMethod
     public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
         DateFormat dateFormat = new SimpleDateFormat("dd_MMM_yyyy__hh_mm_ss");
         Date date = new Date();
@@ -32,5 +33,11 @@ public class BaseTest {
             FileUtils.copyFile(scrFile, new File("D:\\ScreenShots\\ScreenShot_"+ dateFormat.format(date)+".jpg"));
             System.out.println("Test failed. Taking a screenshot...");
         }
+    }*/
+
+    @DataProvider
+    public Object[][] userCreds(){
+        Object[][] testDataArray = CustomReaders.excelConverter("src/test/resources/testdata/testdata.xls", "testdata");
+        return (testDataArray);
     }
 }

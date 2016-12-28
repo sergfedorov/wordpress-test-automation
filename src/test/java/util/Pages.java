@@ -47,12 +47,8 @@ public class Pages {
         return (getPage(ViewPostPage.class));
     }
 
-
-    static PublishedPostPage PPP;
     public static PublishedPostPage publishedPostP() {
-        PPP = getPage(PublishedPostPage.class);
-        //return (getPage(PublishedPostPage.class));
-        return PPP;
+        return getPage(PublishedPostPage.class);
     }
 
     public static MyProfilePage myProfilePage() {

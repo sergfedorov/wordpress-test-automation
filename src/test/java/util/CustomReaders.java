@@ -48,6 +48,7 @@ public class CustomReaders {
         CHROME("chrome");
 
         private String value;
+
         BrowserType(String value) {
             this.value = value;
         }

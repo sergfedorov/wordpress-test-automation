@@ -14,7 +14,7 @@ public class EditorPage extends Page{
 
     @FindBy(how = How.CSS, using = ".editor-title__input")
     WebElement postTitleField;
-    @FindBy(how = How.CSS, using = ".editor-ground-control__publish-button")
+    @FindBy(how = How.XPATH, using = "//div[@class='editor-ground-control__publish-combo']/button[1]")
     WebElement publishButton;
     @FindBy(how = How.ID, using = "tinymce-1_ifr")
     WebElement postEditor;
