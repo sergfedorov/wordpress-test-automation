@@ -1,6 +1,6 @@
-package BlogTest;
+package tests;
 
-import BlogPO.Pages;
+import pages.Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;

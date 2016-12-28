@@ -1,6 +1,6 @@
-package BlogTest;
+package tests;
 
-import BlogPO.Pages;
+import pages.Pages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;

@@ -1,4 +1,4 @@
-package BlogTest;
+package tests;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -71,7 +71,7 @@ public class BaseTest {
     public static BrowserType getBrowserTypeFromProperty() {
         BrowserType type = null;
         try {
-            FileInputStream file = new FileInputStream("wordpress.properties");
+            FileInputStream file = new FileInputStream("src\\test\\resources\\properties\\wordpress.properties");
             Properties properties = new Properties();
             properties.load(file);
             String browserName = properties.getProperty("browser");

@@ -1,7 +1,7 @@
-package BlogTest;
+package tests;
 
-import BlogPO.Pages;
-import Util.ExcelReader;
+import pages.Pages;
+import util.ExcelReader;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -99,7 +99,7 @@ public class LoginTest extends BaseTest {
 
     @DataProvider
     public Object[][] userCreds(){
-        Object[][] testDataArray = ExcelReader.excelConverter("testdata.xls", "testdata");
+        Object[][] testDataArray = ExcelReader.excelConverter("src/test/resources/testdata/testdata.xls", "testdata");
         return (testDataArray);
     }
 }

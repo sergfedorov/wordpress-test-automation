@@ -1,10 +1,13 @@
-package BlogPO;
+package pages;
 
-import BlogTest.BaseTest;
-import org.openqa.selenium.WebDriver;
+import tests.BaseTest;
 import org.openqa.selenium.support.PageFactory;
 
 public class Pages {
+
+    private Pages(){}
+
+    static LoginPage lp;
 
     // Take the PO class as input parameter, initialize its elements and return the PO
     public static  <T> T GetPage(Class<T> cls) {
@@ -21,7 +24,12 @@ public class Pages {
     }
 
     public static LoginPage LoginP() {
-        return (GetPage(LoginPage.class));
+        if (lp == null){
+            lp = GetPage(LoginPage.class);
+            return lp;
+        }
+
+        return lp;
     }
 
     public static DashboardPage DashboardP() {
