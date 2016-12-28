@@ -6,8 +6,9 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
-public class ExcelReader {
+public class CustomReaders {
 
     public static Object[][] excelConverter(String filePath, String sheetName) {
 
@@ -41,4 +42,41 @@ public class ExcelReader {
 
         return sheetArray;
     }
+
+    public enum BrowserType {
+        FIREFOX("firefox"),
+        CHROME("chrome");
+
+        private String value;
+        BrowserType(String value) {
+            this.value = value;
+        }
+
+        public String getBrowserName() {
+            return this.value;
+        }
+    }
+
+
+    // Read the properties file and return enum BrowserType (firefox or chrome) from it
+    public static BrowserType getBrowserTypeFromProperty() {
+        BrowserType type = null;
+        try {
+            FileInputStream file = new FileInputStream("src\\test\\resources\\properties\\wordpress.properties");
+            Properties properties = new Properties();
+            properties.load(file);
+            String browserName = properties.getProperty("browser");
+            for (BrowserType bType : BrowserType.values()) {
+                if (bType.getBrowserName().equalsIgnoreCase(browserName)) {
+                    type = bType;
+                    System.out.println("Browser is " + bType);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return type;
+    }
+
+
 }

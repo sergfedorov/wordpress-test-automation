@@ -1,53 +1,48 @@
 package tests;
 
-import pages.Pages;
+import util.Pages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import util.BaseTest;
 
-public class DeletePostTest extends BaseTest{
-
-    @BeforeTest
-    public void initBrowserAndPageObjects(){
-        driver = super.getDriver(getBrowserTypeFromProperty());
-    }
+public class DeletePostTest extends BaseTest {
 
     @BeforeClass
     public void blogLogin(){
-        Pages.LoginP().login("editorwebdrivertest", "EditorTest");
+        Pages.loginP().login("editorwebdrivertest", "EditorTest");
     }
 
     @Test(priority = 1)
     public void deleteFirstPost(){
-        Pages.PostsP().navigate();
-        int trashCounterBeforeTrash = Pages.PostsP().trashCounter();
+        Pages.postsP().navigate();
+        int trashCounterBeforeTrash = Pages.postsP().trashCounter();
         System.out.println("trashCounterBeforeTrash " + trashCounterBeforeTrash);
 
-        Pages.PostsP().deleteFirstPost();
+        Pages.postsP().deleteFirstPost();
 
-        int trashCounterAfterTrash = Pages.PostsP().trashCounter();
+        int trashCounterAfterTrash = Pages.postsP().trashCounter();
         System.out.println("trashCounterAfterTrash " + trashCounterAfterTrash);
 
-        Assert.assertTrue(Pages.PostsP().isTrashConfirmationAlertDisplayed());
+        Assert.assertTrue(Pages.postsP().isTrashConfirmationAlertDisplayed());
         Assert.assertEquals(trashCounterBeforeTrash, trashCounterAfterTrash-1);
     }
 
     @Test(priority = 2)
     public void deleteFirstPostFromTrash(){
-        Pages.PostsP().navigate();
-        Pages.PostsP().filterByTrashed();
-        Pages.PostsP().deletePostPermanently();
-        Pages.PostsP().acceptDeletePermanentlyAlert();
-        Assert.assertTrue(Pages.PostsP().isPostDeletedAlertDisplayed());
-        Assert.assertEquals(Pages.PostsP().getPostDeletedAlertText(), "Post Deleted");
+        Pages.postsP().navigate();
+        Pages.postsP().filterByTrashed();
+        Pages.postsP().deletePostPermanently();
+        Pages.postsP().acceptDeletePermanentlyAlert();
+        Assert.assertTrue(Pages.postsP().isPostDeletedAlertDisplayed());
+        Assert.assertEquals(Pages.postsP().getPostDeletedAlertText(), "Post Deleted");
     }
 
     @Test(priority = 3)
     public void trashedPostPage(){
-        Pages.PostsP().navigate();
-        Pages.PostsP().openTrashedPost();
-        Assert.assertEquals(Pages.ViewPostP().getPageTitleText() , "Page not found – sergeywebdrivertest");
+        Pages.postsP().navigate();
+        Pages.postsP().openTrashedPost();
+        Assert.assertEquals(Pages.viewPostP().getPageTitleText() , "Page not found – sergeywebdrivertest");
     }
 
 }

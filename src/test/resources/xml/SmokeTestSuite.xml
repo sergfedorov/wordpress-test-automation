@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke Test Suite">
+    <test name="Wordpress">
+        <classes>
+            <class name="tests.LoginTest">
+            <methods>
+                <include name = "loginPositiveUsernameTest"/>
+            </methods>
+            </class>
+            <class name="tests.CreatePostTest">
+                <methods>
+                    <include name = "verifyPublishedPost"/>
+                </methods>
+            </class>
+            <class name="tests.EditPostTest">
+                <methods>
+                    <include name = "verifyViewPublished"/>
+                </methods>
+            </class>
+            <class name="tests.DeletePostTest">
+                <methods>
+                    <include name = "deleteFirstPost"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

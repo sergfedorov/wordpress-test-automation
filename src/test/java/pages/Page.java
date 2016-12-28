@@ -1,11 +1,12 @@
 package pages;
 
-import tests.BaseTest;
+import util.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import util.Driver;
 
 public abstract class Page{
 
@@ -13,7 +14,7 @@ public abstract class Page{
     private int explicitWaitTimeout = 5;
 
     public Page(){
-        this.driver = BaseTest.driver;
+        this.driver = Driver.getInstance();
     }
 
 

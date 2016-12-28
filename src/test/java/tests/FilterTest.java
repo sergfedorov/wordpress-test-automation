@@ -1,35 +1,30 @@
 package tests;
 
-import pages.Pages;
+import util.Pages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import util.BaseTest;
 
-public class FilterTest extends BaseTest{
-
-    @BeforeTest
-    public void initBrowserAndPageObjects(){
-        driver = super.getDriver(getBrowserTypeFromProperty());
-    }
+public class FilterTest extends BaseTest {
 
     @BeforeClass
     public void blogLogin(){
-        Pages.LoginP().navigate();
-        Pages.LoginP().login("editorwebdrivertest", "EditorTest");
+        Pages.loginP().navigate();
+        Pages.loginP().login("editorwebdrivertest", "EditorTest");
     }
 
     @Test
     public void filterByMe(){
-        Pages.PostsP().navigate();
-        Pages.PostsP().filterByMe();
+        Pages.postsP().navigate();
+        Pages.postsP().filterByMe();
         Assert.assertTrue(driver.getCurrentUrl().contains("/posts/my/"));
     }
 
     @Test
     public void filterByEveryone(){
-        Pages.PostsP().navigate();
-        Pages.PostsP().filterByEveryone();
+        Pages.postsP().navigate();
+        Pages.postsP().filterByEveryone();
         Assert.assertFalse(driver.getCurrentUrl().contains("/posts/my/"));
     }
 }

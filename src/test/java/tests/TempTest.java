@@ -1,20 +1,16 @@
 package tests;
 
-import pages.Pages;
+import util.Pages;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import util.BaseTest;
 
 public class TempTest extends BaseTest {
 
-    @BeforeTest
-    public void initBrowserAndPageObjects() {
-        driver = super.getDriver(getBrowserTypeFromProperty());
-    }
 
     @BeforeClass
     public void blogLoginTest() {
-        Pages.LoginP().login("editorwebdrivertest", "EditorTest");
+        Pages.loginP().login("editorwebdrivertest", "EditorTest");
     }
 
     String EXPECTED_TITLE = "new post title test";
@@ -22,10 +18,10 @@ public class TempTest extends BaseTest {
 
     @Test
      public void createPost(){
-        Pages.PostsP().navigate();
-        Pages.PostsP().clickCreatePost();
-        Pages.EditorP().createPost(EXPECTED_TITLE, EXPECTED_DESCRIPTION);
-        Pages.EditorP().viewPublishedPostInNewTab();
+        Pages.postsP().navigate();
+        Pages.postsP().clickCreatePost();
+        Pages.editorP().createPost(EXPECTED_TITLE, EXPECTED_DESCRIPTION);
+        Pages.editorP().viewPublishedPostInNewTab();
     }
 
 }
