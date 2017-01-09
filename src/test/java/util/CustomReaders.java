@@ -73,7 +73,7 @@ public class CustomReaders {
             for (BrowserType bType : BrowserType.values()) {
                 if (bType.getBrowserName().equalsIgnoreCase(browserName)) {
                     type = bType;
-                    System.out.println("Browser is " + bType);
+                    //System.out.println("Browser is " + bType);
                 }
             }
         } catch (IOException e) {
@@ -82,7 +82,7 @@ public class CustomReaders {
         return type;
     }
 
-    public static String getChromeDriverPathFromProperties(){
+    public static String getChromeDriverPathFromProperties() {
         FileInputStream file = null;
         try {
             file = new FileInputStream(propertiesPath);

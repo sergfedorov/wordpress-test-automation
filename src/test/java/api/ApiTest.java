@@ -1,12 +1,9 @@
 package api;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
@@ -20,7 +17,7 @@ public class ApiTest extends BaseApiTest {
     @Test (priority = 0)
     public void myApiTest() throws IOException {
 
-        Response response = webResource.
+        Response response = baseUrl.
                 path("/posts/621").
                 request().
                 get();
@@ -40,7 +37,7 @@ public class ApiTest extends BaseApiTest {
         Form myform = new Form();
         myform.param("content", "API555");
 
-        Response createComment = webResource.
+        Response createComment = baseUrl.
                 path("/posts/632/replies/new").
                 request().
                 header("Authorization", accessToken).
@@ -54,7 +51,7 @@ public class ApiTest extends BaseApiTest {
     @Test (priority = 2)
     public void getSingleComment() {
 
-        Response getComment = webResource.
+        Response getComment = baseUrl.
                 path("/comments/" + commentId).
                 request().
                 get();
@@ -66,7 +63,7 @@ public class ApiTest extends BaseApiTest {
     @Test (priority = 3)
     public void deleteComment() {
 
-        Response deleteComment = webResource.
+        Response deleteComment = baseUrl.
                 path("/comments/" + commentId + "/delete").
                 request().
                 header("Authorization", accessToken).
