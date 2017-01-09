@@ -5,10 +5,13 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
 public class CustomReaders {
+
+    private static String propertiesPath = "src\\test\\resources\\properties\\wordpress.properties";
 
     public static Object[][] excelConverter(String filePath, String sheetName) {
 
@@ -63,7 +66,7 @@ public class CustomReaders {
     public static BrowserType getBrowserTypeFromProperty() {
         BrowserType type = null;
         try {
-            FileInputStream file = new FileInputStream("src\\test\\resources\\properties\\wordpress.properties");
+            FileInputStream file = new FileInputStream(propertiesPath);
             Properties properties = new Properties();
             properties.load(file);
             String browserName = properties.getProperty("browser");
@@ -77,6 +80,22 @@ public class CustomReaders {
             e.printStackTrace();
         }
         return type;
+    }
+
+    public static String getChromeDriverPathFromProperties(){
+        FileInputStream file = null;
+        try {
+            file = new FileInputStream(propertiesPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Properties properties = new Properties();
+        try {
+            properties.load(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return properties.getProperty("chromedriverpath");
     }
 
 

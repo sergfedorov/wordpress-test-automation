@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import util.CustomReaders;
 
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
@@ -16,7 +17,7 @@ public class Driver {
 
     public static WebDriver getInstance() {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", CustomReaders.getChromeDriverPathFromProperties());
             driver = new ChromeDriver();
         }
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
