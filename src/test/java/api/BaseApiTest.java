@@ -1,6 +1,7 @@
 package api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.testng.Assert;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -22,16 +23,16 @@ public class BaseApiTest {
     protected Form requestBody = new Form();
 
 
-    protected void deleteComment(int commentId){
+    protected void deleteComment(int commentId) {
         Response deleteComment = baseUrl.
-                path("/comments/"+commentId+"/delete").
+                path("/comments/" + commentId + "/delete").
                 request().
                 header("Authorization", accessToken).
                 post(null);
 
         String deleteCommentJson = deleteComment.readEntity(String.class);
 
-        if(deleteComment.getStatus() == 200){
+        if (deleteComment.getStatus() == 200) {
             System.out.println("Comment has been deleted");
         } else {
             System.out.println("Comment has not been deleted. Error message: " + deleteCommentJson);
@@ -52,6 +53,36 @@ public class BaseApiTest {
         return commentID;
     }
 
+    public String getSingleComment(int commentId) throws IOException {
+        Response getSingleComment = baseUrl.
+                path("/comments/"+commentId).
+                request(MediaType.APPLICATION_JSON).
+                get();
+
+        String getSingleCommentJson = getSingleComment.readEntity(String.class);
+        return getSingleCommentJson;
+    }
+
+    protected String getAccessToken() throws IOException {
+
+        requestBody.param("client_id", "47945");
+        requestBody.param("client_secret", "vOvOueRn43x4FPnB89wHD3z5hMqFdGwwNslSlo3BAu0kJmDrxmYgIr2Zuo0pVgQJ");
+        requestBody.param("grant_type", "password");
+        requestBody.param("username", "editorwebdrivertest");
+        requestBody.param("password", "EditorTest");
+
+        Response getAccessToken = ClientBuilder.
+                newClient().
+                target("https://public-api.wordpress.com/oauth2/token").
+                request().
+                header("Content-Type", "application/x-www-form-urlencoded").
+                post(Entity.entity(requestBody, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
+
+        String getAccessTokenJSON = getAccessToken.readEntity(String.class);
+        accessToken = mapper.readTree(getAccessTokenJSON).get("access_token").asText();
+
+        return accessToken;
+    }
 
 
 }

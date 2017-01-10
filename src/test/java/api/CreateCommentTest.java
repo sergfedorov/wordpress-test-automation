@@ -55,12 +55,30 @@ public class CreateCommentTest extends BaseApiTest{
                 request(MediaType.APPLICATION_JSON).
                 header("Authorization", accessToken).
                 header("Content-Type", "application/x-www-form-urlencoded").
-                post(Entity.entity(requestBody.param("content", ""), MediaType.APPLICATION_FORM_URLENCODED_TYPE));
+                post(Entity.entity(requestBody.param("content", ""),
+                        MediaType.APPLICATION_FORM_URLENCODED_TYPE));
 
         String createCommentJson = createComment.readEntity(String.class);
 
         Assert.assertEquals(createComment.getStatus(), 400);
         Assert.assertEquals(createCommentJson, "{\"error\":\"invalid_input\",\"message\":\"Invalid request input\"}");
+    }
+
+    @Test
+    public void createCommentNotAuthorizedExpectedError403(){
+
+        Response createComment = baseUrl.
+                path("/posts/"+postId+"/replies/new").
+                request(MediaType.APPLICATION_JSON).
+                header("Content-Type", "application/x-www-form-urlencoded").
+                post(Entity.entity(requestBody.param("content", "API test"),
+                        MediaType.APPLICATION_FORM_URLENCODED_TYPE));
+
+        String createCommentJson = createComment.readEntity(String.class);
+        //System.out.println(createCommentJson);
+
+        Assert.assertEquals(createComment.getStatus(), 403);
+        Assert.assertEquals(createCommentJson, "{\"error\":\"authorization_required\",\"message\":\"An active access token must be used to comment.\"}");
     }
 
 }

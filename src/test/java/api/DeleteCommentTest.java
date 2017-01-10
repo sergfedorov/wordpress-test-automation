@@ -64,6 +64,24 @@ public class DeleteCommentTest extends BaseApiTest {
 
         Assert.assertEquals(deletePermanentlyComment.getStatus(), 404);
         Assert.assertEquals(deletePermanentlyCommentJson, "{\"error\":\"unknown_comment\",\"message\":\"Unknown comment\"}");
+
+        super.deleteComment(commentId);
+    }
+
+    @Test
+    public void trashCommentNotAuthorizedExpectedError403() throws IOException {
+
+        int commentId = super.createComment();
+        Response trashComment = baseUrl.
+                path("/comments/" + commentId + "/delete").
+                request().
+                post(null);
+
+        String trashCommentJson = trashComment.readEntity(String.class);
+
+        Assert.assertEquals(trashComment.getStatus(), 403);
+        Assert.assertEquals(trashCommentJson, "{\"error\":\"unauthorized\",\"message\":\"User cannot delete comment\"}");
+        super.deleteComment(commentId);
     }
 
 }

@@ -75,4 +75,24 @@ public class EditCommentTest extends BaseApiTest{
         Assert.assertEquals(editNotExistingComment.getStatus(), 404);
         Assert.assertEquals(editNotExistingCommenttJson, "{\"error\":\"unknown_comment\",\"message\":\"Unknown comment\"}");
     }
+
+    @Test
+    public void editCommentNotAuthorizedExpectedError403() throws IOException {
+
+        int commentId = super.createComment();
+        Response editComment = baseUrl.
+                path("/comments/"+commentId).
+                request(MediaType.APPLICATION_JSON).
+                header("Content-Type", "application/x-www-form-urlencoded").
+                post(Entity.entity(requestBody.param("content", "API Test UPDATE " + LocalDateTime.now()),
+                        MediaType.APPLICATION_FORM_URLENCODED_TYPE));
+
+        String editCommentJson = editComment.readEntity(String.class);
+        System.out.println(editCommentJson);
+
+        Assert.assertEquals(editComment.getStatus(), 403);
+        Assert.assertEquals(editCommentJson, "{\"error\":\"unauthorized\",\"message\":\"User cannot edit comment\"}");
+
+        super.deleteComment(commentId);
+    }
 }
