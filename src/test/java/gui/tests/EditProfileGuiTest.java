@@ -1,12 +1,12 @@
 package gui.tests;
 
-import utils.Pages;
+import gui.Pages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import utils.BaseTest;
+import gui.BaseGuiTest;
 
-public class EditProfileTest extends BaseTest {
+public class EditProfileGuiTest extends BaseGuiTest {
 
     @BeforeClass
     public void blogLogin(){

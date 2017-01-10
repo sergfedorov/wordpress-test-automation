@@ -1,12 +1,12 @@
 package gui.tests;
 
-import utils.Pages;
+import gui.Pages;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import utils.BaseTest;
+import gui.BaseGuiTest;
 
 
-public class CreatePostTest extends BaseTest {
+public class CreatePostGuiTest extends BaseGuiTest {
 
     String EXPECTED_TITLE = "new post title test";
     String EXPECTED_DESCRIPTION = "new description test";

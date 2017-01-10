@@ -1,12 +1,12 @@
 package gui.tests;
 
-import utils.Pages;
+import gui.Pages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import utils.BaseTest;
+import gui.BaseGuiTest;
 
-public class DeletePostTest extends BaseTest {
+public class DeletePostGuiTest extends BaseGuiTest {
 
     @BeforeClass
     public void blogLogin(){

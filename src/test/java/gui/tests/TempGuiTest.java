@@ -1,11 +1,11 @@
 package gui.tests;
 
-import utils.Pages;
+import gui.Pages;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import utils.BaseTest;
+import gui.BaseGuiTest;
 
-public class TempTest extends BaseTest {
+public class TempGuiTest extends BaseGuiTest {
 
 
     @BeforeClass

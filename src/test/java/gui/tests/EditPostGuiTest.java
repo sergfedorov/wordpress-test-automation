@@ -1,14 +1,14 @@
 package gui.tests;
 
-import utils.Pages;
+import gui.Pages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import utils.BaseTest;
+import gui.BaseGuiTest;
 
 
-public class EditPostTest extends BaseTest {
+public class EditPostGuiTest extends BaseGuiTest {
 
     String EXPECTED_TITLE = "title update";
     String EXPECTED_DESCRIPTION = "description update";

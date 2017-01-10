@@ -1,4 +1,4 @@
-package utils;
+package gui;
 
 import gui.pages.*;
 import org.openqa.selenium.support.PageFactory;

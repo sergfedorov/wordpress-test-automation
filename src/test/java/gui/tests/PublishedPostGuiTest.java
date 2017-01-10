@@ -1,11 +1,11 @@
 package gui.tests;
 
-import utils.Pages;
+import gui.Pages;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.BaseTest;
+import gui.BaseGuiTest;
 
-public class PublishedPostTest extends BaseTest {
+public class PublishedPostGuiTest extends BaseGuiTest {
 
     /*@BeforeTest
     public void initBrowserAndPageObjects(){

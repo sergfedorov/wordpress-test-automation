@@ -3,22 +3,22 @@
 <suite name="Smoke Test Suite">
     <test name="Wordpress">
         <classes>
-            <class name="gui.tests.LoginTest">
+            <class name="gui.tests.LoginGuiTest">
             <methods>
                 <include name = "loginPositiveUsernameTest"/>
             </methods>
             </class>
-            <class name="gui.tests.CreatePostTest">
+            <class name="gui.tests.CreatePostGuiTest">
                 <methods>
                     <include name = "verifyPublishedPost"/>
                 </methods>
             </class>
-            <class name="gui.tests.EditPostTest">
+            <class name="gui.tests.EditPostGuiTest">
                 <methods>
                     <include name = "verifyViewPublished"/>
                 </methods>
             </class>
-            <class name="gui.tests.DeletePostTest">
+            <class name="gui.tests.DeletePostGuiTest">
                 <methods>
                     <include name = "deleteFirstPost"/>
                 </methods>

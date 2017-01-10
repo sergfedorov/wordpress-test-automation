@@ -1,14 +1,14 @@
 package gui.tests;
 
-import utils.Pages;
-import utils.BaseTest;
+import gui.Pages;
+import gui.BaseGuiTest;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class LoginTest extends BaseTest {
+public class LoginGuiTest extends BaseGuiTest {
 
     @Test(priority = 1)
     public void loginNegativeTest1() {
