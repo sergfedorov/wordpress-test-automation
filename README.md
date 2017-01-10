@@ -8,7 +8,7 @@ Developed a framework that is based on page object pattern and data driven frame
 **Technologies:** Selenium WebDriver, Java, TestNG, Maven
 
 ## API tests.
-Wrote several tests using Jersey Client.
+Wrote several tests using Jersey Client.  
 **Technologies:** Java, Jersey Client, Jackson, TestNG, Maven
 
 ## Project structure
