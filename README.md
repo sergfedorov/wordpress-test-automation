@@ -4,7 +4,7 @@ This is the training project where I develop and improve skills in test automati
 Project consists of two parts: GUI tests and API tests.
 
 ## GUI tests.
-Developed a framework that is based on page object pattern and data driven framework.
+Developed a framework that is based on page object pattern and data driven framework.  
 **Technologies:** Selenium WebDriver, Java, TestNG, Maven
 
 ## API tests.
