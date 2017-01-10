@@ -1,6 +1,6 @@
-package util;
+package utils;
 
-import pages.*;
+import gui.pages.*;
 import org.openqa.selenium.support.PageFactory;
 
 public class Pages {

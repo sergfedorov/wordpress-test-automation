@@ -1,4 +1,4 @@
-package pages;
+package gui.pages;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

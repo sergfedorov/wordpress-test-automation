@@ -1,7 +1,7 @@
-package tests;
+package gui.tests;
 
-import util.Pages;
-import util.BaseTest;
+import utils.Pages;
+import utils.BaseTest;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;

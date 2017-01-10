@@ -1,10 +1,10 @@
-package tests;
+package gui.tests;
 
-import util.Pages;
+import utils.Pages;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import util.BaseTest;
+import utils.BaseTest;
 
 public class DeletePostTest extends BaseTest {
 
