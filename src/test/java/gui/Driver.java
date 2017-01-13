@@ -39,7 +39,7 @@ public class Driver {
             else {
                 System.setProperty("webdriver.chrome.driver", CustomReaders.getChromeDriverPathFromProperties());
                 driver = new ChromeDriver();
-                System.out.println("Wrong browser type in properties file. Default browser will be used.");
+                System.out.println("Wrong browser type specified in properties file. Default browser will be used.");
             }
         }
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);

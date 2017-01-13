@@ -31,14 +31,12 @@ public class GetSingleComment extends BaseApiTest{
     @Test
     public void getNotExistingSingleCommentExpectedError404() throws IOException {
 
-        //int commentId = super.createComment();
         Response getSingleComment = baseUrl.
                 path("/comments/456465").
                 request(MediaType.APPLICATION_JSON).
                 get();
 
         String getSingleCommentJson = getSingleComment.readEntity(String.class);
-        //System.out.println(getSingleCommentJson);
 
         Assert.assertEquals(getSingleComment.getStatus(), 404);
         Assert.assertEquals(getSingleCommentJson, "{\"error\":\"unknown_comment\",\"message\":\"Unknown comment\"}");
