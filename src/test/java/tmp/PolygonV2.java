@@ -1,6 +1,7 @@
 package tmp;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,18 +23,26 @@ public class PolygonV2 {
 
         System.out.println("Enter path to the input file: ");
         Scanner scanner = new Scanner(System.in);
-        String path = scanner.nextLine();
-        scanner.close();
+        String inputFileByUser = scanner.nextLine();
+        File inputFile = new File(inputFileByUser);
 
-        File inputFile = new File(path);
-        BufferedReader br;
-        try {
-            FileInputStream fis = new FileInputStream(inputFile);
-            br = new BufferedReader(new InputStreamReader(fis));
-        } catch (FileNotFoundException ex) {
-            System.out.println("The file " + inputFile.getPath() + " was not found.");
-            return;
+
+        while (!inputFile.exists()) {
+            System.out.println("The file " + inputFile.getPath() + " was not found. Please try again.");
+            scanner = new Scanner(System.in);
+            inputFileByUser = scanner.nextLine();
+            inputFile = new File(inputFileByUser);
         }
+
+
+        if (inputFile.exists() && !Files.probeContentType(inputFile.toPath()).equals("text/plain")) {
+            System.out.println("It is not a TXT file. Please try again.");
+
+        }
+
+
+        FileInputStream fis = new FileInputStream(inputFile);
+        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 
         File outputFile = new File(outFile);
         FileOutputStream fos = new FileOutputStream(outputFile);
