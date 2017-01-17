@@ -1,13 +1,10 @@
-package luxtest;
+package tmp;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.stream.Stream;
+import java.util.Scanner;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
@@ -15,18 +12,31 @@ import static java.lang.Math.sqrt;
 public class PolygonV2 {
 
     public static void main(String args[]) throws IOException {
-        String inputFilePath = "D:\\point.txt";
-        String outputFilePath = "D:\\output.txt";
-        File inputFile = new File(inputFilePath);
-        File outputFile = new File(outputFilePath);
+        //String inputFilePath = "D:\\point.txt";
+        //String outputFilePath = "D:\\output.txt";
 
-        readFile(inputFile, outputFile);
+        PolygonV2.readFile("", "D:\\output.txt");
     }
 
-    private static void readFile(File inFile, File outFile) throws IOException {
-        FileOutputStream fos = new FileOutputStream(outFile);
-        FileInputStream fis = new FileInputStream(inFile);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+    public static void readFile(String inFile, String outFile) throws IOException {
+
+        System.out.println("Enter path to the input file: ");
+        Scanner scanner = new Scanner(System.in);
+        String path = scanner.nextLine();
+        scanner.close();
+
+        File inputFile = new File(path);
+        BufferedReader br;
+        try {
+            FileInputStream fis = new FileInputStream(inputFile);
+            br = new BufferedReader(new InputStreamReader(fis));
+        } catch (FileNotFoundException ex) {
+            System.out.println("The file " + inputFile.getPath() + " was not found.");
+            return;
+        }
+
+        File outputFile = new File(outFile);
+        FileOutputStream fos = new FileOutputStream(outputFile);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
         ArrayList<String> coordinatePairArrayFromLine;
@@ -39,18 +49,17 @@ public class PolygonV2 {
 
         while ((line = br.readLine()) != null) {
 
-            System.out.println("Line #" + lineNumber + " is " + line);
+            writeOutputToConsoleAndFile("Line #" + lineNumber + " is " + line, bw);
+
             //Validation
             String regex = "([0-9]+:[0-9]+,){1,}[0-9]+:[0-9]+|[0-9]+:[0-9]+";
             if (line.matches(regex)) {
-                System.out.println("--- Validation is PASSED");
+                writeOutputToConsoleAndFile("--- Validation is PASSED", bw);
             } else {
-                System.out.println("--- Validation is FAILED. Moving to the next line.");
+                writeOutputToConsoleAndFile("--- Validation is FAILED. Moving to the next line.", bw);
                 lineNumber++;
                 continue;
             }
-
-            //System.out.
 
             String[] coordinatePair = line.split(",");
 
@@ -59,29 +68,26 @@ public class PolygonV2 {
             singleCoordinateArrayFromLine = new ArrayList<Integer>();
 
             // Loop for each coordinate pair. coordinatePairArray contains all coordinate pairs from current file line
-            for (int cp = 0; cp < coordinatePair.length; cp++) {
-                coordinatePairArrayFromLine.add(coordinatePair[cp]);
+            for (String aCoordinatePair : coordinatePair) {
+                coordinatePairArrayFromLine.add(aCoordinatePair);
 
-                String[] singleCoordinate = coordinatePair[cp].split(":");
+                String[] singleCoordinate = aCoordinatePair.split(":");
 
                 // Loop for single coordinate. singleCoordinateArray contains all coordinates from current file line
-                for (int sc = 0; sc < singleCoordinate.length; sc++) {
-                    singleCoordinateArrayFromLine.add(n, Integer.parseInt(singleCoordinate[sc]));
+                for (String aSingleCoordinate : singleCoordinate) {
+                    singleCoordinateArrayFromLine.add(n, Integer.parseInt(aSingleCoordinate));
                     n++;
                 }
 
             }
 
-            bw.write(String.valueOf(singleCoordinateArrayFromLine));
-
             singleCoordinateArrayFromFile.add(singleCoordinateArrayFromLine);
             coordinatePairArrayFromFile.add(coordinatePairArrayFromLine);
 
             //Checks
-            whatTheFigureIs(singleCoordinateArrayFromLine);
+            writeOutputToConsoleAndFile(whatTheFigureIs(singleCoordinateArrayFromLine), bw);
 
             lineNumber++;
-
         }
 
         //System.out.println(singleCoordinateArrayFromFile);
@@ -93,14 +99,18 @@ public class PolygonV2 {
 
     }
 
-    public static void lineValidator(String line) {
+    //public static void enterFilePath()
 
+    public static void writeOutputToConsoleAndFile(String outLine, BufferedWriter bufferedWriter) throws IOException {
+        System.out.println(outLine);
+        bufferedWriter.write(outLine);
+        bufferedWriter.newLine();
     }
 
-    public static void sortAndPrintMultidimArrayList(ArrayList list) {
+    /*public static void sortAndPrintMultidimArrayList(ArrayList list) {
         //sort by vertex number
         Collections.sort(list, new Comparator<ArrayList<String>>() {
-            @Override
+            //@Override
             public int compare(ArrayList<String> o1, ArrayList<String> o2) {
                 return o1.size() - o2.size();
             }
@@ -109,23 +119,22 @@ public class PolygonV2 {
         for (Object singleLine : list) {
             System.out.println(singleLine);
         }
-    }
+    }*/
 
-    public static void whatTheFigureIs(ArrayList list) {
-        if (list.size() == 2) {
-            System.out.println("--- RESULT: This is a POINT");
-        } else if (list.size() == 4) {
+    public static String whatTheFigureIs(ArrayList<Integer> list) {
+        if (list.size() == 2)
+            return "--- RESULT: This is a POINT";
+        else if (list.size() == 4)
             //line
-            System.out.println(isLineCorrect(list));
-        } else if (list.size() == 6) {
+            return isLineCorrect(list);
+        else if (list.size() == 6)
             //triangle
-            System.out.println(isTriangleCorrectByCoordinates(list));
-        } else if (list.size() == 8) {
-            System.out.println("It is square - " + isItSquare(list));
-            System.out.println("4angle");
-        } else if (list.size() > 8) {
-            //manyangle
-        }
+            return isTriangleCorrectByCoordinates(list);
+        else if (list.size() == 8)
+            return isItSquare(list);
+        else if (list.size() > 8)
+            return "Figure has mote than 4 angles";
+        return "Hm...";
     }
 
     public static String isLineCorrect(ArrayList list) {
@@ -146,11 +155,15 @@ public class PolygonV2 {
             return "--- RESULT: This is an INVALID TRIANGLE. Please check coordinates";
     }
 
-    public static boolean isItSquare(ArrayList<Integer> list) {
+    public static String isItSquare(ArrayList<Integer> list) {
         double sideA = sqrt(pow((list.get(1) - list.get(0)), 2) + pow((list.get(3) - list.get(2)), 2));
         double sideB = sqrt(pow((list.get(3) - list.get(2)), 2) + pow((list.get(5) - list.get(4)), 2));
         double sideC = sqrt(pow((list.get(5) - list.get(4)), 2) + pow((list.get(7) - list.get(6)), 2));
         double sideD = sqrt(pow((list.get(7) - list.get(6)), 2) + pow((list.get(1) - list.get(0)), 2));
-        return (sideA == sideB && sideB == sideC && sideC == sideD && sideD == sideA);
+        boolean res = (sideA == sideB && sideB == sideC && sideC == sideD && sideD == sideA);
+        if (res)
+            return "--- RESULT: This is a SQUARE";
+        else
+            return "--- RESULT: This is NOT SQUARE. Please check coordinates";
     }
 }
