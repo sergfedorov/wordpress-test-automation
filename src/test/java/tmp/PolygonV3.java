@@ -3,73 +3,21 @@ package tmp;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class PolygonV2 {
+public class PolygonV3 {
 
     /*public static void main(String args[]) throws IOException {
 
         PolygonV2.readFile();
     }*/
 
-    public static void readFile() throws IOException {
-
-        System.out.println("Enter path to the input file: ");
-        Scanner scanner = new Scanner(System.in);
-        String inputFilePathByUser = scanner.nextLine();
-
-        File inputFile;
-
-        if (inputFilePathByUser.equalsIgnoreCase("test"))
-            inputFile = new File("D:\\point.txt");
-        else
-            inputFile = new File(inputFilePathByUser);
-
-        //inputFile = fileValidator(inputFile);
-
-        while (inputFile.isDirectory() || !inputFile.exists() || !Files.probeContentType(inputFile.toPath()).equals("text/plain")) {
-            if (inputFile.isDirectory()) {
-                System.out.println("not a file");
-            } else if (!inputFile.exists()) {
-                System.out.println("no such file");
-            } else if (!Files.probeContentType(inputFile.toPath()).equals("text/plain")) {
-                System.out.println("it is not a txt file");
-            }
-            scanner = new Scanner(System.in);
-            inputFilePathByUser = scanner.nextLine();
-            inputFile = new File(inputFilePathByUser);
-        }
-
-        System.out.println("Enter path to the output file: ");
-        String outputFilePathByUser = scanner.nextLine();
-
-        File outputFile;
-
-        if (outputFilePathByUser.equalsIgnoreCase("test"))
-            outputFile = new File("D:\\output.txt");
-        else
-            outputFile = new File(outputFilePathByUser);
-
-        //outputFile = fileValidator(outputFile);
-
-
-        while (outputFile.isDirectory() || !outputFile.exists() || !Files.probeContentType(outputFile.toPath()).equals("text/plain")) {
-            if (outputFile.isDirectory()) {
-                System.out.println("not a file");
-            } else if (!outputFile.exists()) {
-                System.out.println("no such file");
-            } else if (!Files.probeContentType(outputFile.toPath()).equals("text/plain")) {
-                System.out.println("it is not a txt file");
-            }
-            scanner = new Scanner(System.in);
-            outputFilePathByUser = scanner.nextLine();
-            inputFile = new File(outputFilePathByUser);
-        }
+    public static void readFile(String in, String out) throws IOException {
+        File inputFile = new File(in);
+        File outputFile = new File(out);
 
         FileInputStream fis = new FileInputStream(inputFile);
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
@@ -84,6 +32,11 @@ public class PolygonV2 {
 
         String line;
         int lineNumber = 1;
+
+        if (br.readLine() == null){
+            System.out.println("File is empty");
+            return;
+        }
 
         while ((line = br.readLine()) != null)
 
