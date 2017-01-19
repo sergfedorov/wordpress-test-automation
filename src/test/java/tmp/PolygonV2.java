@@ -26,7 +26,7 @@ public class PolygonV2 {
         File inputFile;
 
         if (inputFilePathByUser.equalsIgnoreCase("test"))
-            inputFile = new File("D:\\point.txt");
+            inputFile = new File("D:\\testdata\\input-valid.txt");
         else
             inputFile = new File(inputFilePathByUser);
 
@@ -51,7 +51,7 @@ public class PolygonV2 {
         File outputFile;
 
         if (outputFilePathByUser.equalsIgnoreCase("test"))
-            outputFile = new File("D:\\output.txt");
+            outputFile = new File("D:\\testdata\\output.txt");
         else
             outputFile = new File(outputFilePathByUser);
 

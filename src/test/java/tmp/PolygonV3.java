@@ -12,27 +12,41 @@ public class PolygonV3 {
 
     public static void main(String args[]) throws IOException {
 
-        //D:\emptyfile.txt
-        //D:\point1.txt
+        //String input = "D:\\testdata\\input-empty.txt";
+        //String input = "D:\\testdata\\input-invalid-emptyline.txt";
+        String input = "D:\\testdata\\input-empty-wrongcoordinate.txt";
+        //String input = "D:\\testdata\\input-valid.txt";
+        //String input = "D:\\testdata\\input-invalid.txt";
+        //String input = "D:\\testdata\\nofile.txt";
+        //String input = "D:\\testdata\\";
+        //String input = "D:";
+        //String input = "D:\\";
+        //String input = "D:\\testdata\\testdata.xls";
+        //String input = "";
+        //String input = " ";
 
-        PolygonV3.readFile("D:\\emptyfile.txt", "D:\\output.txt");
+        PolygonV3.readFile(input, "D:\\output.txt");
     }
 
     public static void readFile(String in, String out) throws IOException {
+        System.out.println("***************************************************************************************");
+        System.out.println("Input and output files should be text files with TXT extension.");
+        System.out.println("Every input file line is polygon point coordinates in format X1:Y1[,X2:Y2,...,XN:YN]");
+        System.out.println("***************************************************************************************");
         File inputFile = new File(in);
         File outputFile = new File(out);
 
         if (inputFile.isDirectory()) {
-            System.out.println("not a file");
+            System.out.println("ERROR: Wrong input fie path");
             return;
         } else if (!inputFile.exists()) {
-            System.out.println("no such file");
+            System.out.println("ERROR: Input file not found: " + inputFile.getPath());
             return;
         } else if (!Files.probeContentType(inputFile.toPath()).equals("text/plain")) {
-            System.out.println("it is not a txt file");
+            System.out.println("ERROR: Input file must be .txt");
             return;
         } else if (inputFile.length() == 0) {
-            System.out.println("File is empty");
+            System.out.println("ERROR. Input file is empty");
             return;
         }
 
@@ -98,10 +112,9 @@ public class PolygonV3 {
         //System.out.println(coordinatePairArrayFromFile);
         //sortAndPrintMultidimArrayList(coordinatePairArrayFromFile);
 
+        writeOutputToConsoleAndFile("It was the last line", bw);
         br.close();
         bw.close();
-
-        System.out.println("It was the last line");
     }
 
     /*public static File fileValidator(File fileToValidate) throws IOException {

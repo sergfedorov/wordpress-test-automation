@@ -27,19 +27,33 @@ public class PolygonTest {
     }
 
     @Test
-    public void test1() throws IOException {
-
-        PolygonV3.readFile("D:\\point1.txt", "D:\\output.txt");
-        Assert.assertEquals(baos.toString(), "Line #1 is qwe\r\n--- Validation is FAILED. Moving to the next line.\r\nIt was the last line\r\n");
-
+    public void wrongInputFilePath1() throws IOException {
+        PolygonV3.readFile("D:\\testdata", "D:\\output.txt");
+        Assert.assertEquals(baos.toString(), "ERROR: Wrong input fie path\r\n");
     }
 
     @Test
-    public void test2() throws IOException {
+    public void wrongInputFilePath2() throws IOException {
+        PolygonV3.readFile("D:\\testdata\\testdata.xls", "D:\\output.txt");
+        Assert.assertEquals(baos.toString(), "ERROR: Input file must be .txt\r\n");
+    }
 
-        PolygonV3.readFile("D:\\emptyfile.txt", "D:\\output.txt");
-        Assert.assertEquals(baos.toString(), "File is empty\r\n");
+    @Test
+    public void wrongInputFilePath3() throws IOException {
+        PolygonV3.readFile("", "D:\\output.txt");
+        Assert.assertTrue(baos.toString().contains("ERROR: Input file not found:"));
+    }
 
+    @Test
+    public void emptyInputFile() throws IOException {
+        PolygonV3.readFile("D:\\testdata\\input-empty.txt", "D:\\output.txt");
+        Assert.assertEquals(baos.toString(), "ERROR. Input file is empty\r\n");
+    }
+
+    @Test
+    public void invalidInputFile() throws IOException {
+        PolygonV3.readFile("D:\\testdata\\input-empty-wrongcoordinate.txt", "D:\\output.txt");
+        Assert.assertFalse(baos.toString().contains("Validation is PASSED"));
     }
 
 
