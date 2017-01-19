@@ -12,10 +12,10 @@ import static java.lang.Math.sqrt;
 
 public class PolygonV2 {
 
-    /*public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws IOException {
 
         PolygonV2.readFile();
-    }*/
+    }
 
     public static void readFile() throws IOException {
 

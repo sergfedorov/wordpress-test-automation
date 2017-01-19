@@ -10,14 +10,31 @@ import static java.lang.Math.sqrt;
 
 public class PolygonV3 {
 
-    /*public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws IOException {
 
-        PolygonV2.readFile();
-    }*/
+        //D:\emptyfile.txt
+        //D:\point1.txt
+
+        PolygonV3.readFile("D:\\emptyfile.txt", "D:\\output.txt");
+    }
 
     public static void readFile(String in, String out) throws IOException {
         File inputFile = new File(in);
         File outputFile = new File(out);
+
+        if (inputFile.isDirectory()) {
+            System.out.println("not a file");
+            return;
+        } else if (!inputFile.exists()) {
+            System.out.println("no such file");
+            return;
+        } else if (!Files.probeContentType(inputFile.toPath()).equals("text/plain")) {
+            System.out.println("it is not a txt file");
+            return;
+        } else if (inputFile.length() == 0) {
+            System.out.println("File is empty");
+            return;
+        }
 
         FileInputStream fis = new FileInputStream(inputFile);
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
@@ -33,14 +50,7 @@ public class PolygonV3 {
         String line;
         int lineNumber = 1;
 
-        if (br.readLine() == null){
-            System.out.println("File is empty");
-            return;
-        }
-
-        while ((line = br.readLine()) != null)
-
-        {
+        while ((line = br.readLine()) != null) {
 
             writeOutputToConsoleAndFile("Line #" + lineNumber + " is " + line, bw);
 
@@ -82,6 +92,7 @@ public class PolygonV3 {
 
             lineNumber++;
         }
+
 
         //System.out.println(singleCoordinateArrayFromFile);
         //System.out.println(coordinatePairArrayFromFile);
