@@ -52,9 +52,44 @@ public class PolygonTest {
 
     @Test
     public void invalidInputFile() throws IOException {
-        PolygonV3.readFile("D:\\testdata\\input-empty-wrongcoordinate.txt", "D:\\output.txt");
-        Assert.assertFalse(baos.toString().contains("Validation is PASSED"));
+        PolygonV3.readFile("D:\\testdata\\input-invalid-wrongcoordinate.txt", "D:\\output.txt");
+        Assert.assertFalse(baos.toString().contains("Validation is PASSED"), "\r\nActual result: \r\n"+ baos.toString());
     }
 
+    @Test(description = "X1:Y1")
+    public void positiveOneCoordinatePair() throws IOException {
+        PolygonV3.readFile("D:\\testdata\\input-valid-oneline-onecoordinatepair.txt", "D:\\output.txt");
+        Assert.assertTrue(baos.toString().contains("Validation is PASSED"), "\r\nActual result: \r\n"+ baos.toString());
+        Assert.assertTrue(baos.toString().contains("RESULT: This is a POINT"), "\r\nActual result: \r\n"+ baos.toString());
+    }
+
+    @Test(description = "X1:Y1,X2:Y2")
+    public void positiveTwoCoordinatePairs() throws IOException {
+        PolygonV3.readFile("D:\\testdata\\input-valid-oneline-twocoordinatepairs.txt", "D:\\output.txt");
+        Assert.assertTrue(baos.toString().contains("Validation is PASSED"), "\r\nActual result: \r\n"+ baos.toString());
+        Assert.assertTrue(baos.toString().contains("RESULT: This is a LINE"), "\r\nActual result: \r\n"+ baos.toString());
+    }
+
+    @Test(description = "X1:Y1,X1:Y1")
+    public void negativeTwoCoordinatePairs() throws IOException {
+        PolygonV3.readFile("D:\\testdata\\input-invalid-oneline-twocoordinatepairs.txt", "D:\\output.txt");
+        Assert.assertTrue(baos.toString().contains("Validation is PASSED"), "\r\nActual result: \r\n"+ baos.toString());
+        Assert.assertTrue(baos.toString().contains("RESULT: This is an INVALID LINE"), "\r\nActual result: \r\n"+ baos.toString());
+    }
+
+    @Test(description = "X1:Y1,X2:Y2,X3:Y3")
+    public void positiveThreeCoordinatePairs() throws IOException {
+        PolygonV3.readFile("D:\\testdata\\input-valid-oneline-threecoordinatepairs.txt", "D:\\output.txt");
+        Assert.assertTrue(baos.toString().contains("Validation is PASSED"), "\r\nActual result: \r\n"+ baos.toString());
+        Assert.assertTrue(baos.toString().contains("RESULT: This is a TRIANGLE"), "\r\nActual result: \r\n"+ baos.toString());
+    }
+
+
+    @Test(description = "X1:Y1,X2:Y2,X3:Y3 X1:Y1,X2:Y2,X3:Y3 X1:Y1,X2:Y2,X3:Y3 X1:Y1,X2:Y2,X3:Y3")
+    public void negativeThreeCoordinatePairs() throws IOException {
+        PolygonV3.readFile("D:\\testdata\\input-invalid-oneline-threecoordinatepairs.txt", "D:\\output.txt");
+        Assert.assertFalse(baos.toString().contains("Validation is FAILED"), "\r\nActual result: \r\n"+ baos.toString());
+        Assert.assertFalse(baos.toString().contains("RESULT: This is a TRIANGLE"), "\r\nActual result: \r\n"+ baos.toString());
+    }
 
 }

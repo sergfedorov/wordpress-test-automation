@@ -14,7 +14,12 @@ public class PolygonV3 {
 
         //String input = "D:\\testdata\\input-empty.txt";
         //String input = "D:\\testdata\\input-invalid-emptyline.txt";
-        String input = "D:\\testdata\\input-empty-wrongcoordinate.txt";
+        //String input = "D:\\testdata\\input-empty-wrongcoordinate.txt";
+        //String input = "D:\\testdata\\input-valid-oneline-onecoordinatepair.txt";
+        //String input = "D:\\testdata\\input-valid-oneline-twocoordinatepairs.txt";
+        //String input = "D:\\testdata\\input-invalid-oneline-twocoordinatepairs.txt";
+        //String input = "D:\\testdata\\input-valid-oneline-threecoordinatepairs.txt";
+        String input = "D:\\testdata\\input-invalid-oneline-threecoordinatepairs.txt";
         //String input = "D:\\testdata\\input-valid.txt";
         //String input = "D:\\testdata\\input-invalid.txt";
         //String input = "D:\\testdata\\nofile.txt";
@@ -29,10 +34,11 @@ public class PolygonV3 {
     }
 
     public static void readFile(String in, String out) throws IOException {
-        System.out.println("***************************************************************************************");
-        System.out.println("Input and output files should be text files with TXT extension.");
-        System.out.println("Every input file line is polygon point coordinates in format X1:Y1[,X2:Y2,...,XN:YN]");
-        System.out.println("***************************************************************************************");
+        /*System.out.println("****************************************************************************************");
+        System.out.println("* Input and output files should be text files with TXT extension.                      *");
+        System.out.println("* Every input file line is polygon point coordinates in format X1:Y1[,X2:Y2,...,XN:YN] *");
+        System.out.println("****************************************************************************************");
+        */
         File inputFile = new File(in);
         File outputFile = new File(out);
 
@@ -172,21 +178,35 @@ public class PolygonV3 {
     }
 
     public static String isLineCorrect(ArrayList list) {
-        if (list.get(0).equals(list.get(2)) && list.get(1).equals(list.get(3)))
+        if (isAllElementsAreTheSame(list))
             return "--- RESULT: This is an INVALID LINE. Both coordinate pairs are identical";
         else
             return "--- RESULT: This is a LINE";
     }
 
     public static String isTriangleCorrectByCoordinates(ArrayList<Integer> list) {
-        double sideA = sqrt(pow((list.get(1) - list.get(0)), 2) + pow((list.get(3) - list.get(2)), 2));
+        /*double sideA = sqrt(pow((list.get(1) - list.get(0)), 2) + pow((list.get(3) - list.get(2)), 2));
         double sideB = sqrt(pow((list.get(3) - list.get(2)), 2) + pow((list.get(5) - list.get(4)), 2));
-        double sideC = sqrt(pow((list.get(5) - list.get(4)), 2) + pow((list.get(1) - list.get(0)), 2));
-        boolean res = ((sideA < sideB + sideC) && (sideA > sideB - sideC) && (sideB < sideA + sideC) && (sideB > sideA - sideC) && (sideC < sideA + sideB) && (sideC > sideA - sideB));
-        if (res)
-            return "--- RESULT: This is a TRIANGLE";
-        else
+        double sideC = sqrt(pow((list.get(5) - list.get(4)), 2) + pow((list.get(1) - list.get(0)), 2));*/
+        //boolean res = ((sideA < sideB + sideC) && (sideA > sideB - sideC) && (sideB < sideA + sideC) && (sideB > sideA - sideC) && (sideC < sideA + sideB) && (sideC > sideA - sideB));
+
+        boolean isAnyTwoPairsAreIdentical = (list.get(0) == list.get(2)) && (list.get(1) == list.get(3)) || (list.get(0) == list.get(4)) && (list.get(1) == list.get(5)) || (list.get(2) == list.get(4)) && (list.get(3) == list.get(5));
+        boolean isTheSameAxis = ((list.get(0) == list.get(2)) && (list.get(0) == list.get(4)) && (list.get(2) == list.get(4))) || ((list.get(1) == list.get(3)) && (list.get(3) == list.get(5)) && (list.get(1) == list.get(5)));
+
+        if (isAllElementsAreTheSame(list) || isAnyTwoPairsAreIdentical || isTheSameAxis)
             return "--- RESULT: This is an INVALID TRIANGLE. Please check coordinates";
+        else
+            return "--- RESULT: This is a TRIANGLE";
+    }
+
+    public static boolean isAllElementsAreTheSame(ArrayList<Integer> list) {
+        Integer firstItem = list.get(0);
+        Integer c = 0;
+        for (Integer i : list) {
+            if (firstItem == i)
+                c++;
+        }
+        return (c == list.size());
     }
 
     public static String isItSquare(ArrayList<Integer> list) {
