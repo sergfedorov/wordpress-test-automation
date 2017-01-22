@@ -6,26 +6,20 @@ public class Bank {
 
     public static void main(String[] args) {
 
-        bank();
-    }
-
-    public static void bank(){
         System.out.println("Enter the balance of bank account (integer number, negative or positive): ");
         Scanner scanner = new Scanner(System.in);
         String inputFilePathByUser = scanner.nextLine();
 
-        String regex = "-?[0-9]{0,10}";
+        String regex = "-?[0-9]+";
 
         if (inputFilePathByUser.matches(regex)) {
             int res = Integer.valueOf(inputFilePathByUser);
             whatIsMyRate(res);
         } else {
-            System.out.println("It is not a number!");
+            System.out.println("Input validation is failed!");
             return;
         }
-
     }
-
 
     public static void whatIsMyRate(int balance){
         if(balance >= 0 && balance < 100)
