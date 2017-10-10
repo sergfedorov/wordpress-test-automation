@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class LoginGuiTest extends BaseGuiTest {
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false)
     public void loginNegativeTest1() {
         Pages.loginP().navigate();
         Pages.loginP().fillUsernameField("");
@@ -25,7 +25,7 @@ public class LoginGuiTest extends BaseGuiTest {
         Pages.loginP().fillUsernameField("editorwebdrivertest");
         Pages.loginP().fillPasswordField("");
         Pages.loginP().clickLogIn();
-        Assert.assertEquals(Pages.loginP().getErrorMessageText(), "ERROR: The password field is empty.");
+        Assert.assertEquals(Pages.loginP().getErrorMessageText(), "Don't forget to enter your password.");
     }
 
     @Test(priority = 3)
@@ -34,7 +34,7 @@ public class LoginGuiTest extends BaseGuiTest {
         Pages.loginP().fillUsernameField("");
         Pages.loginP().fillPasswordField("somepass");
         Pages.loginP().clickLogIn();
-        Assert.assertEquals(Pages.loginP().getErrorMessageText(), "ERROR: The email or username field is empty.");
+        Assert.assertEquals(Pages.loginP().getErrorMessageText(), "Please enter a username or email address.");
     }
 
     @Test(priority = 4)
@@ -52,10 +52,10 @@ public class LoginGuiTest extends BaseGuiTest {
         Pages.loginP().fillUsernameField("editorwebdrivertest");
         Pages.loginP().fillPasswordField("wrongpass");
         Pages.loginP().clickLogIn();
-        Assert.assertEquals(Pages.loginP().getErrorMessageText(), "ERROR: The password you entered for the email or username editorwebdrivertest is incorrect. Lost your password?");
+        Assert.assertEquals(Pages.loginP().getErrorMessageText(), "Oops, that's not the right password. Please try again!");
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6, enabled = false)
     public void loginNegativeTest6(){
         Pages.loginP().navigate();
         Pages.loginP().fillUsernameField("fedorovbuzzfeed@gmail.com");
@@ -68,7 +68,6 @@ public class LoginGuiTest extends BaseGuiTest {
     public void loginPositiveUsernameTest(){
         Pages.loginP().navigate();
         Pages.loginP().login("editorwebdrivertest", "EditorTest");
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("wp-admin"));
         Assert.assertEquals(driver.getTitle(), "Dashboard ‹ sergeywebdrivertest — WordPress");
         Pages.dashboardP().logOut();
     }
@@ -77,7 +76,6 @@ public class LoginGuiTest extends BaseGuiTest {
     public void loginPositiveEmailTest(){
         Pages.loginP().navigate();
         Pages.loginP().login("fedorovbuzzfeed@gmail.com", "EditorTest");
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.urlContains("wp-admin"));
         Assert.assertEquals(driver.getTitle(), "Dashboard ‹ sergeywebdrivertest — WordPress");
         Pages.dashboardP().logOut();
     }

@@ -10,14 +10,14 @@ public class LoginPage extends Page {
 
     String PAGE_URL = "https://sergeywebdrivertest.wordpress.com/wp-login.php";
 
-    @FindBy(how= How.ID, using = "user_login")
+    @FindBy(how= How.ID, using = "usernameOrEmail")
     WebElement usernameField;
-    @FindBy(how= How.ID, using = "user_pass")
+    @FindBy(how= How.ID, using = "password")
     WebElement passwordField;
-    @FindBy(how= How.ID, using = "wp-submit")
+    @FindBy(how= How.CSS, using = ".form-button")
     WebElement submitLoginButton;
-    @FindBy(id = "login_error")
-    WebElement loginError;
+    @FindBy(css = ".form-input-validation.is-error")
+    WebElement loginFormError;
 
 /*    public LoginPage(){
 
@@ -40,7 +40,7 @@ public class LoginPage extends Page {
         clearTheField(passwordField);
         passwordField.sendKeys(password);
         submitLoginButton.click();
-        (new WebDriverWait(driver, 10)).until(ExpectedConditions.urlContains("wp-admin"));
+        (new WebDriverWait(driver, 10)).until(ExpectedConditions.titleContains("Dashboard"));
     }
 
     public void fillUsernameField(String username){
@@ -61,12 +61,12 @@ public class LoginPage extends Page {
     }
 
     public Boolean isErrorDisplayed(){
-        return loginError.isDisplayed();
+        return loginFormError.isDisplayed();
     }
 
     public String getErrorMessageText(){
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(loginError));
-        return loginError.getText();
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(loginFormError));
+        return loginFormError.getText();
     }
 
     public String getCurrentPageUrl(){
