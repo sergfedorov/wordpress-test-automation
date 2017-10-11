@@ -14,29 +14,31 @@ public class EditorPage extends Page{
 
     @FindBy(how = How.CSS, using = ".editor-title__input")
     WebElement postTitleField;
-    @FindBy(how = How.XPATH, using = "//div[@class='editor-ground-control__publish-combo']/button[1]")
-    WebElement publishButton;
+    @FindBy(css = ".editor-publish-button")
+    WebElement publishButtonFirst;
+    @FindBy(xpath = "//div[@class='editor-confirmation-sidebar__action']/button")
+    WebElement publishButtonSecond;
     @FindBy(how = How.ID, using = "tinymce-1_ifr")
     WebElement postEditor;
     @FindBy(how = How.ID, using = "tinymce")
     WebElement postDescriptionField;
     @FindBy(css = ".is-success")
     WebElement publishedSuccessfullyBar;
-    @FindBy(css = ".editor-ground-control__preview-button")
+    @FindBy(css = "div.editor-notice")
     WebElement previewPostButton;
     @FindBy(css = ".web-preview__frame")
     WebElement previewFrame;
     @FindBy(css = ".notice__action>span")
     WebElement viewPostButton;
-    @FindBy(css = ".is-success>div>span")
+    @FindBy(css = "span.notice__text")
     WebElement publishedSuccessfullyText;
     @FindBy(css = ".editor-status-label")
     WebElement publishedTime;
 
     public void createPost(String postTitleText, String postDescritpionText) {
 
-        Assert.assertFalse(publishButton.isEnabled());
-        Assert.assertEquals(publishButton.getText(), "Publish");
+        /*Assert.assertFalse(publishButtonFirst.isEnabled());
+        Assert.assertEquals(publishButtonFirst.getText(), "Publish");*/
 
         postTitleField.sendKeys(postTitleText);
         driver.switchTo().frame(postEditor);
@@ -49,15 +51,16 @@ public class EditorPage extends Page{
             e.printStackTrace();
         }
 
-        publishButton.click();
-        (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(publishedSuccessfullyBar));
+        publishButtonFirst.click();
+        publishButtonSecond.click();
+        (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(publishedSuccessfullyBar));
     }
 
     public void editPost(String postTitleTextUpdate, String postDescritpionTextUpdate){
-        customExplicitWait(publishButton);
+        customExplicitWait(publishButtonFirst);
 
-        Assert.assertTrue(publishButton.isEnabled());
-        Assert.assertEquals(publishButton.getText(), "Update");
+        Assert.assertTrue(publishButtonFirst.isEnabled());
+        Assert.assertEquals(publishButtonFirst.getText(), "Update");
 
         driver.switchTo().frame(postEditor);
         postDescriptionField.clear();
@@ -65,7 +68,7 @@ public class EditorPage extends Page{
         driver.switchTo().defaultContent();
         postTitleField.clear();
         postTitleField.sendKeys(postTitleTextUpdate);
-        publishButton.click();
+        publishButtonFirst.click();
     }
 
     public ViewPostPage openPreviewPost(){

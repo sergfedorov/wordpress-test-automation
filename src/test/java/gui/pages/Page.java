@@ -10,7 +10,7 @@ import gui.Driver;
 public abstract class Page{
 
     WebDriver driver;
-    private int explicitWaitTimeout = 5;
+    private int explicitWaitTimeout = 8;
 
     public Page(){
         this.driver = Driver.getInstance();

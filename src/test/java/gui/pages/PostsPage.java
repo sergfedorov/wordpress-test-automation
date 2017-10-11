@@ -15,6 +15,8 @@ public class PostsPage extends Page{
 
     @FindBy(className = "gridicons-create")
     WebElement createNewPostLoc;
+    @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__more']")
+    WebElement moreButtonFirstPost;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__trash']")
     WebElement deleteFirstPostButton;
     @FindBy(css = "div[aria-controls='search-component-2']>svg")
@@ -43,8 +45,8 @@ public class PostsPage extends Page{
     WebElement postDeletedAlert;
     @FindBy(xpath = "//div[@class='posts__list']/article[1]//a[@class='post-controls__view']")
     WebElement viewPostButton;
-
-
+    @FindBy(css = ".web-preview__frame")
+    WebElement previewFrame;
 
 
 
@@ -108,7 +110,8 @@ public class PostsPage extends Page{
     }
 
     public void deleteFirstPost() {
-        waitAndClick(deleteFirstPostButton);
+        waitAndClick(moreButtonFirstPost);
+        deleteFirstPostButton.click();
         (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(trashConfirmationAlert));
     }
 
@@ -188,6 +191,13 @@ public class PostsPage extends Page{
         String trashedPostUrl = viewPostButton.getAttribute("href");
         deleteFirstPost();
         driver.get(trashedPostUrl);
+    }
+
+    public ViewPostPage openPreviewPost(){
+        viewPostButton.click();
+        (new WebDriverWait(driver, 5)).until(ExpectedConditions.visibilityOf(previewFrame));
+        driver.switchTo().frame(previewFrame);
+        return PageFactory.initElements(driver, ViewPostPage.class);
     }
 
 
